@@ -1,36 +1,27 @@
 # serve-destiny
 
-
-Join the chat:
-
-[![Join on Discord](https://discordapp.com/api/guilds/242094594181955585/widget.png?style=shield)](https://discord.gg/Bstj9bx)
-
-[Microsoft language server protocol](https://github.com/Microsoft/language-server-protocol) implementation for [D](https://dlang.org).
-
-This program is the heart of code-d (the VS Code extension) and implements most IDE features in D.
-
-The purpose of this project is to give every editor the same capabilities and editing features as code-d through the widely available Microsoft Language Server Protocol (LSP).
-
-Looking for **your Editor**? Check out the [Usage section](#usage)
+A [Language Server Protocol](https://microsoft.github.io/language-server-protocol/)
+server for [Destiny](https://github.com/Destiny-Org/destiny). It gives any LSP
+editor completion, go-to-definition, hover, formatting, linting and Destiny's
+own checks.
 
 ## Features
 
-See the code-d documentation
-
-This implements most language features of the language server protocol for D and also a lot of support for other D related files such as vibe.d diet files and DlangUI DML files.
+- **Destiny errors while you type.** Each file is checked with the `destiny`
+  compiler (500 ms after you stop typing, and on save), including unsaved
+  changes. Errors such as `@safe` violations and scope errors appear in the
+  editor, with the compiler's explanation lines and `fix:` suggestion.
+- **Quick fixes** for Destiny errors: mark a function `@system`, wrap the code
+  in `@trusted`, or add `scope` to a parameter.
+- **Hover** shows whether a function is `@safe`, `@trusted` or `@system`, and
+  why.
+- Completion, go-to-definition and symbol search (DCD), formatting (dfmt),
+  linting (D-Scanner), and DES project support (`dub.json` / `dub.sdl`).
 
 ## Usage
 
-To use serve-destiny you will need an [Editor](https://microsoft.github.io/language-server-protocol/implementors/tools/) (client) with support for the Language Server Protocol. Depending on the editor the initialization code might look different and will need to be adapted for each editor. This is relatively small though and can be done easily for all editors.
-
-**Officially Supported Editors**
-
-* Visual Studio Code: using [code-d](https://marketplace.visualstudio.com/items?itemName=webfreak.code-d)
-* Atom: using [ide-d](https://atom.io/packages/ide-d)
-
-_add LSP configurations using serve-destiny for other editors and PR them here!_
-
-**Other Editor Guides**
+Any editor with an LSP client can run `serve-destiny` over stdio. Guides for
+some editors:
 
 * [vim](editor-vim.md)
 * [sublime text](editor-st.md)
@@ -38,6 +29,21 @@ _add LSP configurations using serve-destiny for other editors and PR them here!_
 * [Helix](editor-helix.md)
 * [Nova](editor-nova.md)
 * [Lite-XL](editor-lite-xl.md)
+* [Zed](editor-zed.md)
+
+serve-destiny needs `destiny` (and `des` for projects) on `PATH`, or set
+`d.dmdPath` and `d.dubPath` to their paths.
+
+Settings for the Destiny checks:
+
+| Setting | Default | Meaning |
+|---|---|---|
+| `d.enableCompilerLinting` | `true` | check files with the Destiny compiler |
+| `d.compilerArgs` | `[]` | extra flags for those checks |
+| `d.dmdPath` | `"destiny"` | the compiler (path or name on `PATH`) |
+| `d.dubPath` | `"des"` | DES, Destiny's package manager |
+
+A file can add its own compiler flags with a `// FLAGS: ...` comment.
 
 ### Project Layout
 
@@ -246,7 +252,7 @@ Otherwise returns the names of available [build types](https://dub.pm/package-fo
 
 **Returns**: `bool`
 
-Sets the current dub build type for building and other tools. Returns true on success.
+Sets the current DES build type for building and other tools. Returns true on success.
 
 #### Request `served/getBuildType`
 
@@ -254,7 +260,7 @@ Sets the current dub build type for building and other tools. Returns true on su
 
 **Returns**: `string`
 
-Returns the current dub build type or null if there is no dub in the active instance.
+Returns the current DES build type or null if there is no DES project in the active instance.
 
 #### Request `served/getCompiler`
 
@@ -793,25 +799,31 @@ interface InteractiveDownload
 
 ### User Configuration
 
-The server has support for configuration for the `d.*` settings described in code-d's `package.json`.
+The server reads the `d.*` settings; the Destiny ones are listed under "Usage" above.
 
 ## Installation
 
-**If you use an existing extension (code-d) you will not need to do these steps**
+Download `serve-destiny_<version>-linux-x86_64.tar.xz` from this repository's
+[releases](https://github.com/Destiny-Org/serve-destiny/releases) and put
+`serve-destiny` on your `PATH`. Only Linux x86_64 is supported, like Destiny.
 
-If you want to manually get the serve-destiny binaries or if you want to add installation support for your editor, check out the sections below. The extension code-d already does this automatically and there is no need to do it there.
+## Building
 
-Installing a pre-built binary:
+serve-destiny is built with Destiny and DES. Check out
+[d-scanner](https://github.com/Destiny-Org/d-scanner) and
+[des](https://github.com/Destiny-Org/des) next to this repository, then:
 
-[Grab latest stable ore pre-release with binaries from GitHub releases](https://github.com/Destiny-Org/serve-destiny/releases)
-
-[Grab latest nightly binaries from GitHub releases](https://github.com/Destiny-Org/serve-destiny/releases)
-
-Manually building from source:
 ```
-dub build
+DFLAGS="-revert=safedefault -O -release -lowmem" \
+    des build --compiler=destiny --build-mode=singleFile
 ```
+
+`--build-mode=singleFile` and `-lowmem` keep the build within 4 GB of memory.
 
 ## Issues
 
-If you have issues with any editors using serve-d, please [report an issue](https://github.com/Destiny-Org/serve-destiny/issues/new)
+Report issues at https://github.com/Destiny-Org/serve-destiny/issues.
+
+## License
+
+MIT; see [LICENSE](LICENSE).

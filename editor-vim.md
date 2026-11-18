@@ -40,13 +40,10 @@ what you are doing.
 
 ## Using *coc's*
 
-### Using *CocInstall*
+### Through *coc-settings.json*
 
-```
-:CocInstall coc-dlang
-```
-
-### Manually through *coc-settings.json*
+(The `coc-dlang` extension installs the upstream D server, not serve-destiny,
+so configure serve-destiny by hand.)
 
 First [download or build serve-destiny](README.md#Installation)
 

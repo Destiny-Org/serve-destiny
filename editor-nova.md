@@ -3,25 +3,17 @@
 
 ## Summary
 
-An extension for Nova called **D-Velop** is [available][2] via the normal
-extension facility.  This extension utilizes serve-destiny for LSP functionality.
+The Nova extension **D-Velop** ([available][2] via the normal extension
+facility) provides LSP support, syntax highlighting, folding and
+indentation (via the Tree-sitter [D grammar][3]).
 
-Installing this will enable D support to work in Nova.
+## Using serve-destiny
 
-It will also enable syntax highlighting, folding, and
-indentation features via the Tree-sitter [D grammar][3].
+D-Velop offers to download its own language server, which is the upstream D
+server, not serve-destiny. Decline that and point the extension at your
+serve-destiny instead (see [Installation](README.md#Installation)), in the
+extension's settings for a custom language server path.
 
-## Requirements
-
-**D-Velop** will offer to automatically download a suitable
-version of serve-destiny, and by default will notify you when new
-releases are available, and offer to update as appropriate.
-
-You can use your own installation of serve-destiny as well, but
-be advised that served version **0.8.0-beta.1 or newer** is
-required to operate with the extension
-
-[1]: https://nova.app "Nova Editor" 
-[2]: https://extensions.panic.com/extensions/tech.staysail/tech.staysail.ServeD/ "Serve-D plugin for nova"
+[1]: https://nova.app "Nova Editor"
+[2]: https://extensions.panic.com/extensions/tech.staysail/tech.staysail.ServeD/ "D-Velop extension for Nova"
 [3]: https://github.com/gdamore/tree-sitter-d/ "Tree-sitter Grammar for D"
- 

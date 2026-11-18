@@ -942,7 +942,7 @@ unittest
 	};
 	documents.process(incomingPacket);
 	// documents.process returns false if it's not a method meant for text
-	// document management. serve-d:serverbase abstracts this away automatically.
+	// document management. serve-destiny:serverbase abstracts this away automatically.
 
 	// normally used from LSP methods where you have params like this
 	TextDocumentPositionParams params = {

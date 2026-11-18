@@ -141,3 +141,7 @@ int getImportCompilationTime(string code, string module_, string file)
 		Fiber.yield();
 	return msecs;
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.code_lens);

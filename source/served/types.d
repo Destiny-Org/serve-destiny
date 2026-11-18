@@ -19,7 +19,7 @@ else // release builds are more optimized with stack usage
 
 static immutable LanguageServerConfig lsConfig = {
 	defaultPages: requiredLibdparsePageCount,
-	productName: "serve-d"
+	productName: "serve-destiny"
 };
 
 mixin LanguageServerRouter!(served.extension, lsConfig) lspRouter;
@@ -81,12 +81,14 @@ struct Configuration
 		@serdeOptional:
 		Nullable!(string, string[]) stdlibPath = Nullable!(string, string[])("auto");
 		string dcdClientPath = "dcd-client", dcdServerPath = "dcd-server";
-		string dubPath = "dub";
-		string dmdPath = "dmd";
+		string dubPath = "des"; // Destiny: DES, Destiny's dub
+		string dmdPath = "destiny"; // Destiny: the compiler used for diagnostics
 		bool enableLinting = true;
 		bool enableSDLLinting = true;
 		bool enableStaticLinting = true;
 		bool enableDubLinting = true;
+		bool enableCompilerLinting = true; // Destiny: errors from `destiny -o-`
+		string[] compilerArgs; // Destiny: extra flags for those checks
 		bool enableAutoComplete = true;
 		bool enableAutoImportCompletions = true;
 		bool enableFormatting = true;
@@ -200,9 +202,9 @@ struct Configuration
 		import served.utils.stdlib_detect;
 
 		return d.stdlibPath.match!(
-			(const typeof(null) _) => autoDetectStdlibPaths(cwd, d.dubCompiler),
+			(const typeof(null) _) => autoDetectStdlibPaths(cwd, d.dubCompiler.length ? d.dubCompiler : d.dmdPath),
 			(const string s) => s == "auto"
-				? autoDetectStdlibPaths(cwd, d.dubCompiler)
+				? autoDetectStdlibPaths(cwd, d.dubCompiler.length ? d.dubCompiler : d.dmdPath)
 				: [s.userPath],
 			(const string[] a) => a.map!(s => s.userPath).array
 		);

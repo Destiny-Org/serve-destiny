@@ -137,8 +137,8 @@ void updateDCD()
 					[
 						anyConfig.git.userPath, "submodule", "update", "--init",
 						"--recursive"
-					], ["dub", "build", "--config=client"],
-					["dub", "build", "--config=server"]
+					], ["des", "build", "--config=client"],
+					["des", "build", "--config=server"]
 				]);
 		finalDestinationClient = buildPath(outputFolder, "DCD", "dcd-client" ~ ext);
 		if (!fs.exists(finalDestinationClient))
@@ -305,3 +305,7 @@ void updateDCD()
 		rpc.notifyMethod("coded/logInstall", "DCD install failed");
 	}
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.dcd_update);

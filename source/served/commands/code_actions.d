@@ -147,6 +147,12 @@ CodeAction[] provideCodeActions(CodeActionParams params)
 		{
 			addSyntaxDiagnostics(ret, instance, document, diagnostic, params);
 		}
+		else if (diagnostic.source == "destiny")
+		{
+			import served.commands.destiny_fixes : addDestinyQuickFixes;
+
+			addDestinyQuickFixes(ret, document, diagnostic);
+		}
 	}
 	return ret;
 }
@@ -653,3 +659,7 @@ TextEdit[] implementMethods(ImplementMethodsParams params)
 		];
 	}
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.code_actions);

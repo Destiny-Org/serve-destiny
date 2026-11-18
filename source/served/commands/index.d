@@ -135,3 +135,7 @@ private void traceIndexerStats(IndexComponent index)
 	trace("- total definitions: ", stats.numDefinitions);
 	trace("- total imports: ", stats.numImports);
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.index);

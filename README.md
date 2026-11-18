@@ -1,7 +1,5 @@
-# serve-d
+# serve-destiny
 
-![build status](https://github.com/Pure-D/serve-d/workflows/Run%20Unittests/badge.svg)
-![deploy nightly](https://github.com/Pure-D/serve-d/workflows/Deploy%20Nightly/badge.svg)
 
 Join the chat:
 
@@ -9,56 +7,28 @@ Join the chat:
 
 [Microsoft language server protocol](https://github.com/Microsoft/language-server-protocol) implementation for [D](https://dlang.org).
 
-This program is the heart of [code-d](https://github.com/Pure-D/code-d) and implements most IDE features in D.
+This program is the heart of code-d (the VS Code extension) and implements most IDE features in D.
 
 The purpose of this project is to give every editor the same capabilities and editing features as code-d through the widely available Microsoft Language Server Protocol (LSP).
 
 Looking for **your Editor**? Check out the [Usage section](#usage)
 
-## Special Thanks
-
-### Corporate Sponsors
-
-Development on code-d/serve-d tools is sponsored by
-
-| [![Weka.IO Logo](sponsors/weka.png)](https://weka.io) |
-|:---:|
-| **[Weka.IO](https://weka.io)** |
-
-If you are looking for a Job with D, check out the companies listed above!
-
-_For professional D consulting, programming services or corporate support with D IDE tools, DUB and the ecosystem, contact me through [dlang@wfr.software](mailto:dlang@wfr.software)_
-
-### Individual Sponsors
-
-**Thanks to the following big GitHub sponsors** financially supporting the code-d/serve-d tools:
-
-| [![ZyeByte's GitHub avatar](https://avatars.githubusercontent.com/u/102230672?s=96&v=4)]((https://github.com/zyebytevt)) |
-|:---:|
-| [@zyebytevt](https://github.com/zyebytevt) |
-
-<!-- additional thanks to the following sponsors:
-
-* Display Name ([@...](https://github.com/username)) -->
-
-_[become a sponsor](https://github.com/sponsors/WebFreak001)_
-
 ## Features
 
-See [code-d wiki](https://github.com/Pure-D/code-d/wiki)
+See the code-d documentation
 
 This implements most language features of the language server protocol for D and also a lot of support for other D related files such as vibe.d diet files and DlangUI DML files.
 
 ## Usage
 
-To use serve-d you will need an [Editor](https://microsoft.github.io/language-server-protocol/implementors/tools/) (client) with support for the Language Server Protocol. Depending on the editor the initialization code might look different and will need to be adapted for each editor. This is relatively small though and can be done easily for all editors.
+To use serve-destiny you will need an [Editor](https://microsoft.github.io/language-server-protocol/implementors/tools/) (client) with support for the Language Server Protocol. Depending on the editor the initialization code might look different and will need to be adapted for each editor. This is relatively small though and can be done easily for all editors.
 
 **Officially Supported Editors**
 
 * Visual Studio Code: using [code-d](https://marketplace.visualstudio.com/items?itemName=webfreak.code-d)
 * Atom: using [ide-d](https://atom.io/packages/ide-d)
 
-_add LSP configurations using serve-d for other editors and PR them here!_
+_add LSP configurations using serve-destiny for other editors and PR them here!_
 
 **Other Editor Guides**
 
@@ -71,34 +41,34 @@ _add LSP configurations using serve-d for other editors and PR them here!_
 
 ### Project Layout
 
-- [`serve-d:http`](./http) - Downloads a file over HTTP with progress using WinHTTP on Windows and the dub requests library on other platforms.
-- [`serve-d:lsp`](./lsp) - LSP protocol types and RPC primitives
-- [`serve-d:serverbase`](./serverbase) - LSP server basics for quickly creating an LSP server for any language.
-- [`serve-d:dcd`](./dcd) - DCD client using direct communication (without spawning dcd-client) for lower latency
-- [`serve-d:workspace-d`](./workspace-d) - Implementation of core D functionality and source code processing using libdparse, dfmt, D-Scanner and DCD.
-- [`source/`](./source) - Maps LSP commands and state to serve-d:workspace-d functionality.
+- [`serve-destiny:http`](./http) - Downloads a file over HTTP with progress using WinHTTP on Windows and the dub requests library on other platforms.
+- [`serve-destiny:lsp`](./lsp) - LSP protocol types and RPC primitives
+- [`serve-destiny:serverbase`](./serverbase) - LSP server basics for quickly creating an LSP server for any language.
+- [`serve-destiny:dcd`](./dcd) - DCD client using direct communication (without spawning dcd-client) for lower latency
+- [`serve-destiny:workspace-destiny`](./workspace-destiny) - Implementation of core D functionality and source code processing using libdparse, dfmt, D-Scanner and DCD.
+- [`source/`](./source) - Maps LSP commands and state to serve-destiny:workspace-destiny functionality.
 
 ### Command Line options
 
-serve-d offers the following command line options to allow the LSP client to configure serve-d on startup:
+serve-destiny offers the following command line options to allow the LSP client to configure serve-destiny on startup:
 
 | Option | Default | Description |
 | ------ | ------- | ----------- |
-| `-r` / `--require` | [] | (allows multiple, optional) List of options which this serve-d version needs to implement. serve-d will intentionally crash on startup if one of the given options is not supported by this version. Specifying or not specifying them will not change anything on runtime. Implemented features: `d` (PoC / unneeded), `workspaces` (multi-workspace support) |
-| `-p` / `--provide` | [] | (allows multiple, optional) List of options to affect behavior of serve-d. Use this to indicate support for special editor features/extensions not covered by the LSP spec. Supported values: (see provides list below) |
+| `-r` / `--require` | [] | (allows multiple, optional) List of options which this serve-destiny version needs to implement. serve-destiny will intentionally crash on startup if one of the given options is not supported by this version. Specifying or not specifying them will not change anything on runtime. Implemented features: `d` (PoC / unneeded), `workspaces` (multi-workspace support) |
+| `-p` / `--provide` | [] | (allows multiple, optional) List of options to affect behavior of serve-destiny. Use this to indicate support for special editor features/extensions not covered by the LSP spec. Supported values: (see provides list below) |
 | `-v` / `--version` | n/a | Prints the version to stdout and exists |
 | `--logfile` | n/a | Overrides the logging output to log to a file instead of stderr for debug logs |
-| `--loglevel` | `verbose` for debug/nightly builds, otherwise `info` | Changes the minimum log level when messages are logged. See `serve-d --help` for possible values |
+| `--loglevel` | `verbose` for debug/nightly builds, otherwise `info` | Changes the minimum log level when messages are logged. See `serve-destiny --help` for possible values |
 | `--lang` | `en` | Changes the language of GUI messages to a supported translation |
 | `--wait` | `false` | Waits for one second before starting (useful to be able to attach when debugging) |
 
 #### `--provide` values
 
-The following provide values are supported by serve-d and will improve interop with the editor:
+The following provide values are supported by serve-destiny and will improve interop with the editor:
 
 **`--provide http`**
 
-When this provide flag is set, serve-d will send a request to the client when it wants to download a file (commonly DCD server files) using the `coded/interactiveDownload` request.
+When this provide flag is set, serve-destiny will send a request to the client when it wants to download a file (commonly DCD server files) using the `coded/interactiveDownload` request.
 
 If this is not set, an internal download function is used which calls `coded/logInstall` on the client on every progress event.
 
@@ -110,17 +80,17 @@ Additionally the code action that would normally just insert a regular string wi
 
 **`--provide context-snippets --provide default-snippets`**
 
-If this is set, auto completion requests will also return built-in and custom defined snippets. Will register snippets for popular DUB dependencies that are built into serve-d.
+If this is set, auto completion requests will also return built-in and custom defined snippets. Will register snippets for popular DUB dependencies that are built into serve-destiny.
 
-NOTE: these flags will be enabled by default in serve-d v0.9.0 and become obsolete then.
+NOTE: these flags will be enabled by default in serve-destiny v0.9.0 and become obsolete then.
 
 <!-- TODO: --provide test-runner + commands to implement -->
 
 ### Custom requests/notifications
 
-serve-d defines a variety of custom requests and notifications for better editor integration. All requests starting with `coded/` are sent from serve-d to the client and all requests starting with `served/` are sent from client to serve-d at any time.
+serve-destiny defines a variety of custom requests and notifications for better editor integration. All requests starting with `coded/` are sent from serve-destiny to the client and all requests starting with `served/` are sent from client to serve-destiny at any time.
 
-serve-d internally handles an active instance which is the instance where last a relevant command has been run. (such as auto complete) It will be used for some commands.
+serve-destiny internally handles an active instance which is the instance where last a relevant command has been run. (such as auto complete) It will be used for some commands.
 
 #### Request `served/sortImports`
 
@@ -166,13 +136,13 @@ interface ImplementMethodsParams
 
 **Returns**: `true`
 
-Restarts all DCD servers started by this serve-d instance. Returns `true` once done.
+Restarts all DCD servers started by this serve-destiny instance. Returns `true` once done.
 
 #### Notification `served/killServer`
 
 **Parameter**: none
 
-Kills all DCD servers started by this serve-d instance.
+Kills all DCD servers started by this serve-destiny instance.
 
 #### Request `served/addDependencySnippet`
 
@@ -180,7 +150,7 @@ Kills all DCD servers started by this serve-d instance.
 
 **Returns**: `boolean`
 
-Registers a snippet across the whole serve-d application which may be limited to given grammatical scopes.
+Registers a snippet across the whole serve-destiny application which may be limited to given grammatical scopes.
 
 Requires `--provide context-snippets`
 
@@ -190,7 +160,7 @@ Returns false if SnippetsComponent hasn't been loaded yet, otherwise true.
 
 **Parameter**: none
 
-Manually triggers a DCD update either by compiling from source or downloading prebuilt binaries depending on the host system and serve-d. Excessively calls the `coded/logInstall` notification.
+Manually triggers a DCD update either by compiling from source or downloading prebuilt binaries depending on the host system and serve-destiny. Excessively calls the `coded/logInstall` notification.
 
 #### Request `served/listConfigurations`
 
@@ -736,7 +706,7 @@ interface UpdateSettingParams
 
 **Params**: `string` message
 
-Instructs the client to log a message that has something to do with the installation routine of serve-d or dependencies.
+Instructs the client to log a message that has something to do with the installation routine of serve-destiny or dependencies.
 
 #### Client notification `coded/initDubTree`
 
@@ -823,19 +793,19 @@ interface InteractiveDownload
 
 ### User Configuration
 
-The server has support for configuration for [these items](https://github.com/Pure-D/code-d/blob/50ca8ca2831403d50bac10681df87a77b1af1bc4/package.json#L168).
+The server has support for configuration for the `d.*` settings described in code-d's `package.json`.
 
 ## Installation
 
 **If you use an existing extension (code-d) you will not need to do these steps**
 
-If you want to manually get the serve-d binaries or if you want to add installation support for your editor, check out the sections below. The extension code-d already does this automatically and there is no need to do it there.
+If you want to manually get the serve-destiny binaries or if you want to add installation support for your editor, check out the sections below. The extension code-d already does this automatically and there is no need to do it there.
 
 Installing a pre-built binary:
 
-[Grab latest stable ore pre-release with binaries from GitHub releases](https://github.com/Pure-D/serve-d/releases)
+[Grab latest stable ore pre-release with binaries from GitHub releases](https://github.com/Destiny-Org/serve-destiny/releases)
 
-[Grab latest nightly binaries from GitHub releases](https://github.com/Pure-D/serve-d/releases/tag/nightly)
+[Grab latest nightly binaries from GitHub releases](https://github.com/Destiny-Org/serve-destiny/releases)
 
 Manually building from source:
 ```
@@ -844,4 +814,4 @@ dub build
 
 ## Issues
 
-If you have issues with any editors using serve-d, please [report an issue](https://github.com/Pure-D/serve-d/issues/new)
+If you have issues with any editors using serve-d, please [report an issue](https://github.com/Destiny-Org/serve-destiny/issues/new)

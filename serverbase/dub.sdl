@@ -1,3 +1,3 @@
 name "serverbase"
 
-dependency "serve-d:lsp" path=".."
+dependency "serve-destiny:lsp" path=".."

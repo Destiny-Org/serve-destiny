@@ -361,7 +361,7 @@ struct FileChanges
 
 package bool getConfigPath(string file, ref string retPath)
 {
-	foreach (dir; standardPaths(StandardPath.config, "workspace-d"))
+	foreach (dir; standardPaths(StandardPath.config, "workspace-destiny"))
 	{
 		auto path = chainPath(dir, file);
 		if (path.exists)

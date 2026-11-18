@@ -36,7 +36,7 @@ dub.action.closeSettingsEditor: Close project settings
 d.createProject: code-d: Create new Project
 d.action.createProject: Create new Project
 
-d.config.workspacedPath: Path of the workspace-d executable. Path can be omitted if in $PATH or installed using code-d
+d.config.workspacedPath: Path of the workspace-destiny executable. Path can be omitted if in $PATH or installed using code-d
 d.config.stdlibPath: Array of paths to phobos and D runtime for automatic inclusion for auto completion
 d.config.dcdClientPath: Path of the dcd-client executable. Path can be omitted if in $PATH or installed using code-d
 d.config.dcdServerPath: Path of the dcd-server executable. Path can be omitted if in $PATH or installed using code-d
@@ -65,10 +65,10 @@ d.config.dfmt.compactLabeledStatements: Place labels on the same line as the lab
 d.config.dfmt.templateConstraintStyle: Control the formatting of template constraints.
 
 d.ext.openUserSettings: Open User Settings
-d.ext.workspacedENOENT: workspace-d is not installed or points to a folder
+d.ext.workspacedENOENT: workspace-destiny is not installed or points to a folder
 d.ext.workspacedENOENT.retry: Retry
-d.ext.workspacedENOENT.install: Install workspace-d
-d.ext.workspacedCrash: workspace-d crashed. Please kill dcd-server if neccessary!
+d.ext.workspacedENOENT.install: Install workspace-destiny
+d.ext.workspacedCrash: workspace-destiny crashed. Please kill dcd-server if neccessary!
 d.ext.workspaced.restart: Restart
 d.ext.importModule: Import {0}
 d.ext.noImportPaths.project: No import paths available for this project. Autocompletion could be broken!
@@ -78,12 +78,12 @@ d.ext.compilerFail: Could not switch compiler
 d.ext.archFail: Could not switch arch type
 d.ext.ultimateArchFail: Failed to switch arch type. See console for details.
 d.ext.dcdUpdateFail: Could not update DCD. Please restart DCD if it's not working properly
-d.ext.workspacedUnresponsive: workspace-d is unresponsive. Auto completion could be broken!
-d.ext.workspacedUnkillable: Could not kill workspace-d. Please manually kill it! PID: {0}
-d.ext.workspacedOutdated.major: workspace-d is outdated! Please update to continue using this plugin. (target={0}, workspaced={1})
-d.ext.workspacedOutdated.minor: workspace-d might be outdated! Please update if things are not working as expected. (target={0}, workspaced={1})
-d.ext.workspacedOutdated.patch: workspace-d has a new optional update! Please update before submitting a bug report. (target={0}, workspaced={1})
-d.ext.workspacedOutdated.unknown: Could not identify workspace-d version. Please update workspace-d!
+d.ext.workspacedUnresponsive: workspace-destiny is unresponsive. Auto completion could be broken!
+d.ext.workspacedUnkillable: Could not kill workspace-destiny. Please manually kill it! PID: {0}
+d.ext.workspacedOutdated.major: workspace-destiny is outdated! Please update to continue using this plugin. (target={0}, workspaced={1})
+d.ext.workspacedOutdated.minor: workspace-destiny might be outdated! Please update if things are not working as expected. (target={0}, workspaced={1})
+d.ext.workspacedOutdated.patch: workspace-destiny has a new optional update! Please update before submitting a bug report. (target={0}, workspaced={1})
+d.ext.workspacedOutdated.unknown: Could not identify workspace-destiny version. Please update workspace-destiny!
 d.ext.workspacedOutdated.install: Install newest version
 d.ext.config.invalid.configuration: Configuration '{0}' which is specified in the config is not available!
 d.ext.config.invalid.archType: Arch Type '{0}' which is specified in the config is not available!
@@ -116,7 +116,7 @@ d.ext.dcdRestarted: Restarted DCD-Server
 d.ext.importsReloaded: Successfully reloaded import paths
 d.ext.importsEmpty: Import paths are empty!
 d.ext.manualReloadFail: Could not update imports. dub might not be initialized yet!
-d.ext.workspacedNotReady: workspace-d not ready yet
+d.ext.workspacedNotReady: workspace-destiny not ready yet
 d.ext.importAddFail: Could not add import
 d.ext.rdmdTitle: rdmd Output
 d.ext.uploader.noCode: No code selected
@@ -133,7 +133,7 @@ d.projects.reloadFail: Failed to reload. Reload manually and run some code-d com
 d.projects.copyFail: Failed to copy template
 d.projects.dubFail: Failed to generate dub.json
 
-d.installer.noPrebuiltWorkspaced: No precompiled workspace-d binary for this platform/architecture
+d.installer.noPrebuiltWorkspaced: No precompiled workspace-destiny binary for this platform/architecture
 d.installer.noPrebuiltDub: dub is not available for your platform
 d.installer.compileFromSource: Compile from source
 d.installer.title: {0} installation progress

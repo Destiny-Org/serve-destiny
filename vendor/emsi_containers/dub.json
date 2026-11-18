@@ -1,0 +1,36 @@
+{
+	"authors": [
+		"EMSI",
+		"DLang Community"
+	],
+	"license": "BSL-1.0",
+	"targetPath": "build",
+	"name": "emsi_containers",
+	"sourcePaths": [
+		"src/"
+	],
+	"description": "Containers that use Phobos' experimental allocators",
+	"homepage": "https://github.com/dlang-community/containers",
+	"importPaths": [
+		"src/"
+	],
+	"version": "0.9.0",
+	"buildTypes": {
+		"unittest": {
+			"buildOptions": [
+				"debugMode",
+				"debugInfo",
+				"unittests"
+			],
+			"versions": [
+				"emsi_containers_unittest"
+			]
+		}
+	},
+	"configurations": [
+		{
+			"targetType": "library",
+			"name": "library"
+		}
+	]
+}

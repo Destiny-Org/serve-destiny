@@ -176,7 +176,7 @@ struct DocumentSymbolParamsEx
 	}
 }
 
-/// special serve-d internal symbol kinds
+/// special serve-destiny internal symbol kinds
 @serdeEnumProxy!int
 enum SymbolKindEx
 {
@@ -338,7 +338,7 @@ struct ArchType
 	string label;
 }
 
-/// Converts the given workspace-d CodeReplacement to an LSP TextEdit
+/// Converts the given workspace-destiny CodeReplacement to an LSP TextEdit
 TextEdit toTextEdit(CodeReplacement replacement, scope const ref Document d)
 {
 	size_t lastIndex;
@@ -432,7 +432,7 @@ if (!is(T == struct) && !is(T == Dummy[string], Dummy))
 	mixin("alias " ~ valueName ~ " = _implicitValue;");
 
 	@safe pure scope
-	IonException deserializeFromIon(scope const char[][] symbolTable, IonDescribedValue fullValue)
+	IonException deserializeFromIon(scope const char[][] symbolTable, scope IonDescribedValue fullValue)
 	{
 		import mir.deser.ion : deserializeIon;
 		import mir.ion.type_code : IonTypeCode;

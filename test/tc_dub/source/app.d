@@ -18,9 +18,9 @@ void main()
 
 	dub.upgradeAndSelectAll();
 	assert(dub.dependencies.length > 2);
-	assert(dub.rootDependencies == ["serve-d:workspace-d"]);
+	assert(dub.rootDependencies == ["serve-destiny:workspace-destiny"]);
 	// this can be
-	// tc_fsworkspace/source, workspace-d/source
+	// tc_fsworkspace/source, workspace-destiny/source
 	// if no dependencies are fetched
 	// or with all dependencies there a lot more
 	assert(dub.imports.length >= 2, dub.imports.to!string);
@@ -33,7 +33,7 @@ void main()
 	assert(dub.buildTypes.length);
 	assert(dub.configuration == "application");
 	assert(dub.archTypes.length);
-	assert(!dub.archType.length); // compiler default (null) has been default since serve-d 0.8.0
+	assert(!dub.archType.length); // compiler default (null) has been default since serve-destiny 0.8.0
 	assert(dub.buildType == "debug");
 	assert(dub.compiler.length);
 	assert(dub.name == "test-fsworkspace");

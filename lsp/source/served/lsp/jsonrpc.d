@@ -27,7 +27,7 @@ class RPCProcessor : Fiber
 		this.writer = writer;
 
 		// LDC requires we don't use any TLS variables in the RPC processor on OSX
-		// this assumption holds true for most of serve-d, but should be verified
+		// this assumption holds true for most of serve-destiny, but should be verified
 		// every once in a while using `-vtls` to print all TLS variables.
 		static if (__traits(hasMember, Fiber, "allowMigration"))
 			allowMigration();
@@ -145,7 +145,7 @@ class RPCProcessor : Fiber
 	void sendRawPacket(scope const(char)[][] parts)
 	{
 		// Consider turning on logging on client side instead!
-		// (vscode setting: "serve-d.trace.server": "verbose")
+		// (vscode setting: "serve-destiny.trace.server": "verbose")
 		version (TracePackets)
 		{
 			import std.algorithm;
@@ -516,7 +516,7 @@ private:
 			if (stopped || content is null)
 				break;
 			assert(content.length == contentLength);
-			content = content.chomp(); // https://github.com/Pure-D/serve-d/issues/305
+			content = content.chomp(); // some clients send a trailing newline
 			RequestMessageRaw request;
 			RequestMessageRaw[] extraRequests;
 			try

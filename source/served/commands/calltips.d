@@ -198,3 +198,7 @@ SignatureHelp provideDietSignatureHelp(TextDocumentPositionParams params,
 	}
 	return SignatureHelp.init;
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.calltips);

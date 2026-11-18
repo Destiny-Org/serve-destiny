@@ -170,3 +170,7 @@ void onChangeProfileGC(DidChangeWatchedFilesParams params)
 			profileGCCache.clear(change.uri);
 	}
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.workers.profilegc);

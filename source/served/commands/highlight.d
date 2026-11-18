@@ -78,3 +78,7 @@ package DocumentHighlight[] fallbackDocumentHighlight(scope ref immutable(Docume
 
 	return result;
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.highlight);

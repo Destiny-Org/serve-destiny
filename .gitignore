@@ -5,7 +5,7 @@ __dummy.html
 *.a
 *.obj
 *-test-*
-/serve-d
+/serve-destiny
 *.dll
 *.lib
 *.exe

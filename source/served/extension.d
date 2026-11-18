@@ -172,9 +172,19 @@ void changedConfig(ConfigWorkspace target, string[] paths, served.types.Configur
 			{
 				import served.linters.dscanner : clear1 = clear;
 				import served.linters.dub : clear2 = clear;
+				import served.linters.destiny : clear3 = clear;
 
 				clear1();
 				clear2();
+				clear3();
+			}
+			break;
+		case "d.enableCompilerLinting":
+			if (!config.d.enableCompilerLinting)
+			{
+				import served.linters.destiny : clear;
+
+				clear();
 			}
 			break;
 		case "d.enableStaticLinting":
@@ -253,10 +263,10 @@ InitializeResult initialize(InitializeParams params)
 		import std.file : exists, mkdir, tempDir;
 		import std.path : buildPath;
 
-		auto tmpFolder = buildPath(tempDir, "serve-d-dummy-workspace");
+		auto tmpFolder = buildPath(tempDir, "serve-destiny-dummy-workspace");
 		if (!tmpFolder.exists)
 			mkdir(tmpFolder);
-		fallbackWorkspace.folder = WorkspaceFolder(tmpFolder.uriFromFile, "serve-d dummy tmp folder");
+		fallbackWorkspace.folder = WorkspaceFolder(tmpFolder.uriFromFile, "serve-destiny dummy tmp folder");
 		fallbackWorkspace.initialized = true;
 		fallbackWorkspace.useGlobalConfig = true;
 	}
@@ -340,7 +350,7 @@ ServerInfo makeServerInfo()
 
 		// only included in non-test builds, because served.info is excluded from the unittest configurations
 		ServerInfo serverInfo = {
-			name: "serve-d",
+			name: "serve-destiny",
 			version_: format!"v%(%s.%)%s"(Version,
 				VersionSuffix.length ? text('-', VersionSuffix) : VersionSuffix)
 		};
@@ -366,7 +376,7 @@ void doGlobalStartup(UserConfiguration config)
 
 	try
 	{
-		trace("Initializing serve-d for global access");
+		trace("Initializing serve-destiny for global access");
 
 		Configuration.ValueT[string] dubSettings;
 		if (config.d.dubCompiler.length)
@@ -386,7 +396,7 @@ void doGlobalStartup(UserConfiguration config)
 
 		trace("Setup global configuration as " ~ backend.globalConfiguration.base.to!string);
 
-		reportProgress(ProgressType.globalStartup, 0, 0, "Initializing serve-d...");
+		reportProgress(ProgressType.globalStartup, 0, 0, "Initializing serve-destiny...");
 
 		trace("Registering dub");
 		backend.register!DubComponent(false);
@@ -576,7 +586,7 @@ void doStartup(string workspaceUri, UserConfiguration userConfig)
 		error("Trying to do startup on unknown workspace ", workspaceUri, "?");
 		return;
 	}
-	trace("Initializing serve-d for " ~ workspaceUri);
+	trace("Initializing serve-destiny for " ~ workspaceUri);
 
 	struct Root
 	{
@@ -678,7 +688,7 @@ bool[] forceLoadProjects(string[] rootPaths)
 			roots[i].success = false;
 			continue;
 		}
-		trace("Initializing serve-d for " ~ rootUri);
+		trace("Initializing serve-destiny for " ~ rootUri);
 
 		bool isDub = dubRecipeExists(rootPath, true);
 		RootSuggestion suggestion;
@@ -1200,6 +1210,8 @@ void onDidChangeDocument(DidChangeTextDocumentParams params)
 
 	doDscanner(params);
 
+	doDestinyCheck(document);
+
 	int delay = document.length > 50 * 1024 ? 500 : 50; // be slower after 50KiB
 	clearTimeout(genericChangeTimeout);
 	genericChangeTimeout = setTimeout({
@@ -1207,6 +1219,19 @@ void onDidChangeDocument(DidChangeTextDocumentParams params)
 
 		lint(document);
 		// Delay to avoid too many requests
+	}, delay);
+}
+
+int destinyChangeTimeout;
+/// Destiny: re-checks the document with the compiler shortly after typing stops.
+void doDestinyCheck(Document document)
+{
+	int delay = document.length > 50 * 1024 ? 1500 : 500; // the compiler is slower than D-Scanner
+	clearTimeout(destinyChangeTimeout);
+	destinyChangeTimeout = setTimeout({
+		import served.linters.destiny : lint;
+
+		lint(document);
 	}, delay);
 }
 
@@ -1386,6 +1411,14 @@ void onDidSaveDocument(DidSaveTextDocumentParams params)
 
 				lint(document);
 			}
+		}, {
+			if (config.d.enableCompilerLinting && document.getLanguageId == "d")
+			{
+				import served.linters.destiny;
+
+				lint(document);
+				clearTimeout(destinyChangeTimeout);
+			}
 		});
 	}
 }
@@ -1457,3 +1490,7 @@ alias memberModules = AliasSeq!(
 	served.workers.rename_listener,
 );
 //dfmt on
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.extension);

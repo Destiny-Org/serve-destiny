@@ -1,10 +1,10 @@
-# serve-d with Emacs
+# serve-destiny with Emacs
 
 ## Using eglot
 
 Download or build
 
-* [serve-d](README.md#Installation)
+* [serve-destiny](README.md#Installation)
 * [eglot](https://github.com/joaotavora/eglot#1-2-3)
 * [d-mode](https://github.com/Emacs-D-Mode-Maintainers/Emacs-D-Mode)
 
@@ -12,10 +12,10 @@ And edit your `$HOME/.emacs` or `$HOME/.emacs.d/init.el`.
 
 ```elisp
 (add-hook 'd-mode-hook 'eglot-ensure)
-(add-to-list 'eglot-server-programs `(d-mode . ("/path/to/your/serve-d")))
+(add-to-list 'eglot-server-programs `(d-mode . ("/path/to/your/serve-destiny")))
 ```
 
-OPTIONAL: If you want to customize serve-d (e.g. specifying paths), add
+OPTIONAL: If you want to customize serve-destiny (e.g. specifying paths), add
 
 ```elisp
 (setq-default eglot-workspace-configuration

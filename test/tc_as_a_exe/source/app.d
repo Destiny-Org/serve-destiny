@@ -30,9 +30,9 @@ else
 void main()
 {
 	version (Windows)
-		string exe = `..\..\serve-d.exe`;
+		string exe = `..\..\serve-destiny.exe`;
 	else
-		string exe = `../../serve-d`;
+		string exe = `../../serve-destiny`;
 
 	globalLogLevel = LogLevel.all;
 

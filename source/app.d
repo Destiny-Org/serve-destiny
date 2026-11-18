@@ -1,11 +1,11 @@
 /**
- * Entry-point to serve-d
+ * Entry-point to serve-destiny
  *
  * Replaces std.stdio stdout with stderr so writeln calls don't accidentally
  * write to the RPC output.
  *
  * Handles all command line arguments, possibly modifying global state variables
- * when enabling serve-d specific protocol extensions are requested.
+ * when enabling serve-destiny specific protocol extensions are requested.
  *
  * Handles all the request/notification dispatch, calls (de)serialization of
  * given JSON parameters and return values and responds back to the RPC.
@@ -48,7 +48,7 @@ void printVersion(io.File output = io.stdout)
 
 	import served.info;
 
-	output.writefln("serve-d standalone v%(%s.%)%s", Version,
+	output.writefln("serve-destiny standalone v%(%s.%)%s", Version,
 			VersionSuffix.length ? text('-', VersionSuffix) : VersionSuffix);
 	output.writefln("Included features: %(%s, %)", IncludedFeatures);
 	// There will always be a line which starts with `Built: ` forever, it is considered stable. If there is no line, assume version 0.1.2
@@ -135,7 +135,7 @@ int main(string[] args)
 	{
 		if (printVer)
 			printVersion();
-		defaultGetoptPrinter("workspace-d / vscode-language-server bridge", argInfo.options);
+		defaultGetoptPrinter("workspace-destiny / vscode-language-server bridge", argInfo.options);
 		return 0;
 	}
 	if (printVer)
@@ -155,9 +155,9 @@ int main(string[] args)
 			io.stderr.writeln();
 			io.stderr.writeln(
 					"FATAL: Extension-requested feature set '" ~ feature
-					~ "' is not in this version of serve-d!");
+					~ "' is not in this version of serve-destiny!");
 			io.stderr.writeln("---");
-			io.stderr.writeln("HINT: Maybe serve-d is outdated?");
+			io.stderr.writeln("HINT: Maybe serve-destiny is outdated?");
 			io.stderr.writeln();
 			return 1;
 		}
@@ -182,13 +182,13 @@ int main(string[] args)
 			import served.commands.complete : doCompleteSnippets;
 
 			doCompleteSnippets = true;
-			trace("Context snippets handled by serve-d");
+			trace("Context snippets handled by serve-destiny");
 			break;
 		case "default-snippets":
 			import served.extension : registerDefaultSnippets;
 
 			registerDefaultSnippets = true;
-			trace("Some dependency snippets will be registered by serve-d");
+			trace("Some dependency snippets will be registered by serve-destiny");
 			break;
 		case "test-runner":
 			import served.commands.test_provider : doTrackTests;
@@ -209,7 +209,7 @@ int main(string[] args)
 			trace("Bundling consecutive ManyProjectsAction.ask loads into a single async notification (skips load meanwhile)");
 			break;
 		default:
-			warningf("Unknown --provide flag '%s' provided. Maybe serve-d is outdated?", provide);
+			warningf("Unknown --provide flag '%s' provided. Maybe serve-destiny is outdated?", provide);
 			break;
 		}
 	}

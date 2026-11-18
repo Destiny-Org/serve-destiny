@@ -55,7 +55,7 @@ class DfmtComponent : ComponentWrapper
 		string configPath;
 		if (getConfigPath("dfmt.json", configPath))
 		{
-			stderr.writeln("Overriding dfmt arguments with workspace-d dfmt.json config file");
+			stderr.writeln("Overriding dfmt arguments with workspace-destiny dfmt.json config file");
 			try
 			{
 				auto json = parseJSON(fs.readText(configPath));
@@ -70,7 +70,7 @@ class DfmtComponent : ComponentWrapper
 			}
 			catch (Exception e)
 			{
-				stderr.writeln("dfmt.json in workspace-d config folder is malformed");
+				stderr.writeln("dfmt.json in workspace-destiny config folder is malformed");
 				stderr.writeln(e);
 			}
 		}

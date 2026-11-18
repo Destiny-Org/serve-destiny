@@ -20,7 +20,7 @@ import dscanner.analysis.config : StaticAnalysisConfig, Check;
 import dscanner.analysis.local_imports : LocalImportCheck;
 
 static immutable string DScannerDiagnosticSource = "DScanner";
-static immutable string SyntaxHintDiagnosticSource = "serve-d";
+static immutable string SyntaxHintDiagnosticSource = "serve-destiny";
 
 //dfmt off
 static immutable StaticAnalysisConfig servedDefaultDscannerConfig = {

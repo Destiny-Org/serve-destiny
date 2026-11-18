@@ -36,7 +36,7 @@ dub.action.closeSettingsEditor: Закрыть настройки проекта
 d.createProject: code-d: Создать новый проект
 d.action.createProject: Создать новый проект
 
-d.config.workspacedPath: Путь к исполняемому файлу workspace-d. Может не использоваться, если находится в $PATH или установлен используя code-d
+d.config.workspacedPath: Путь к исполняемому файлу workspace-destiny. Может не использоваться, если находится в $PATH или установлен используя code-d
 d.config.stdlibPath: Лист путей к phobos и Druntime для автоматического  заполнения
 d.config.dcdClientPath: Путь к исполняемому файлу dcd-client. Может не использоваться, если находится в $PATH или установлен используя code-d
 d.config.dcdServerPath: Путь к исполняемому файлу dcd-server. Может не использоваться, если находится в $PATH или установлен используя code-d
@@ -65,10 +65,10 @@ d.config.dfmt.compactLabeledStatements: Поместить метки в ту ж
 d.config.dfmt.templateConstraintStyle: Управление форматированием шаблонных ограничений.
 
 d.ext.openUserSettings: Открыть пользовательские настройки
-d.ext.workspacedENOENT: workspace-d не установлен или ведет к папке
+d.ext.workspacedENOENT: workspace-destiny не установлен или ведет к папке
 d.ext.workspacedENOENT.retry: Попробовать заново
-d.ext.workspacedENOENT.install: Установить workspace-d
-d.ext.workspacedCrash: workspace-d остановился неожиданно. Пожалуйста, при необходимости остановите DCD-server!
+d.ext.workspacedENOENT.install: Установить workspace-destiny
+d.ext.workspacedCrash: workspace-destiny остановился неожиданно. Пожалуйста, при необходимости остановите DCD-server!
 d.ext.workspaced.restart: Перезапустить
 d.ext.importModule: Импорт {0}
 d.ext.noImportPaths.project: Нет доступных путей импорта для этого проекта. Автозаполнение может не работать!
@@ -78,12 +78,12 @@ d.ext.compilerFail:Не удалось сменить компилятор
 d.ext.archFail: Не удалось сменить тип архитектуры
 d.ext.ultimateArchFail: Не удалось сменить тип архитектуры. Проверьте консоль для информации.
 d.ext.dcdUpdateFail: Не удалось обновить DCD. Пожалуйста, перезапустите DCD, если он работает неправильно.
-d.ext.workspacedUnresponsive: workspace-d не отвечает. Автозаполнение может не работать!
-d.ext.workspacedUnkillable: Не удалось остановить workspace-d. Пожалуйста, остановите его вручную! PID: {0}
-d.ext.workspacedOutdated.major: workspace-d устарел! Пожалуйста, обновите чтобы продолжить использование этого плагина. (target={0}, workspaced={1})
-d.ext.workspacedOutdated.minor: workspace-d может быть устаревшим! Пожалуйста, обновите если что-то работает неправильно. (target={0}, workspaced={1})
-d.ext.workspacedOutdated.patch: workspace-d имеет новое, дополнительное обновление! Пожалуйста, обновите прежде чем сообщать об ошибках. (target={0}, workspaced={1})
-d.ext.workspacedOutdated.unknown: Не удалось определить версию workspace-d. Пожалуйста, обновите workspace-d!
+d.ext.workspacedUnresponsive: workspace-destiny не отвечает. Автозаполнение может не работать!
+d.ext.workspacedUnkillable: Не удалось остановить workspace-destiny. Пожалуйста, остановите его вручную! PID: {0}
+d.ext.workspacedOutdated.major: workspace-destiny устарел! Пожалуйста, обновите чтобы продолжить использование этого плагина. (target={0}, workspaced={1})
+d.ext.workspacedOutdated.minor: workspace-destiny может быть устаревшим! Пожалуйста, обновите если что-то работает неправильно. (target={0}, workspaced={1})
+d.ext.workspacedOutdated.patch: workspace-destiny имеет новое, дополнительное обновление! Пожалуйста, обновите прежде чем сообщать об ошибках. (target={0}, workspaced={1})
+d.ext.workspacedOutdated.unknown: Не удалось определить версию workspace-destiny. Пожалуйста, обновите workspace-destiny!
 d.ext.workspacedOutdated.install: Установить новейшую версию
 d.ext.config.invalid.configuration: Конфигурация '{0}', указанная в конфигурации, недоступен!
 d.ext.config.invalid.archType: Тип архитектуры '{0}', указанный в конфигурации, недоступен!
@@ -115,7 +115,7 @@ d.ext.dcdRestarted: DCD-Server Перезапущен
 d.ext.importsReloaded: Успешно загружены пути импорта
 d.ext.importsEmpty: Пути импорта пусты!
 d.ext.manualReloadFail: Не удалось обновить импорт. возможно, dub еще не инициализирован!
-d.ext.workspacedNotReady: workspace-d еще не готов
+d.ext.workspacedNotReady: workspace-destiny еще не готов
 d.ext.importAddFail: Не удалось добавить импорт
 d.ext.rdmdTitle: Вывод rdmd
 d.ext.uploader.noCode: Код не выбран
@@ -132,7 +132,7 @@ d.projects.reloadFail: Не удалось перезагрузить. Пере�
 d.projects.copyFail: Не удалось скопировать шаблон
 d.projects.dubFail: Не удалось сгенерировать dub.json
 
-d.installer.noPrebuiltWorkspaced: Нет предкомпилированного workspace-d для этой платформы/архитектуры
+d.installer.noPrebuiltWorkspaced: Нет предкомпилированного workspace-destiny для этой платформы/архитектуры
 d.installer.noPrebuiltDub: dub недоступен для Вашей платформы
 d.installer.compileFromSource: Скомпилировать из источника
 d.installer.title: {0} прогресс установки

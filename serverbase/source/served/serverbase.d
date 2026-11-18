@@ -153,10 +153,15 @@ mixin template LanguageServerRouter(alias ExtensionModule, LanguageServerConfig 
 			return res;
 		}
 
-		size_t numHandlers;
-		eventProcessor.emitProtocol!(protocolMethod, (name, callSymbol, uda) {
-			numHandlers++;
-		}, false)(msg.method, msg.paramsJson);
+		import served.utils.handlers : ensureProtocolHandlersRegistered,
+			requestHandlersFor, RequestHandler;
+
+		ensureProtocolHandlersRegistered!(ExtensionModule, ExtensionModule.memberModules)();
+
+		// handlers are looked up at run time (see served.utils.handlers), so
+		// the router does not instantiate per-method code
+		auto handlers = requestHandlersFor(msg.method);
+		const numHandlers = handlers.length;
 
 		// trace("Function ", msg.method, " has ", numHandlers, " handlers");
 		if (numHandlers == 0)
@@ -175,104 +180,57 @@ mixin template LanguageServerRouter(alias ExtensionModule, LanguageServerConfig 
 		}
 
 		string fiberName = msg.fiberName;
+		const params = msg.paramsJson;
 
 		int working = 0;
 		string[] partialResults;
-		void handlePartialWork(Symbol, Arguments)(Symbol fn, Arguments args)
+		void addPartial(string json)
 		{
-			working++;
-			pushFiber(fiberName ~ " (partial)", {
-				scope (exit)
-					working--;
-				auto thisId = working;
-				trace("Partial ", thisId, " / ", numHandlers, "... ", partialResultToken.length ?
-					"(supported)" : "(no support)");
-				auto result = fn(args.expand);
-				trace("Partial ", thisId, " = ", result);
-				auto json = result.serializeJson;
-				if (!partialResultToken.length)
-					partialResults ~= json;
-				else
-					rpc.notifyProgressRaw(partialResultToken, json);
-				processRequestObservers(msg, result);
-			});
+			if (!partialResultToken.length)
+				partialResults ~= json;
+			else
+				rpc.notifyProgressRaw(partialResultToken, json);
 		}
 
-		void handlePartialIterator(Symbol, Arguments)(Symbol fn, Arguments args)
-		{
-			working++;
-			pushFiber(fiberName ~ " (iterator)", {
-				scope (exit)
-					working--;
-				auto thisId = working;
-				trace("Partial iterator as ", thisId, " / ", numHandlers, "... ",
-					partialResultToken.length ? "(supported)" : "(no support)");
-				auto result = fn(args.expand);
-				foreach (chunk; result)
-				{
-					static if (is(typeof(chunk) == T[], T))
-					{
-						trace("Partial iterator #", thisId, " got ", chunk.length, " new entries");
-						auto partialResult = chunk;
-					}
-					else
-					{
-						trace("Partial iterator #", thisId, " got single new entry");
-						auto partialResult = [chunk];
-					}
-					auto json = partialResult.serializeJson;
-					if (!partialResultToken.length)
-						partialResults ~= json;
-					else
-						rpc.notifyProgressRaw(partialResultToken, json);
-					processRequestObservers(msg, partialResult);
-				}
-				trace("Partial iterator as ", thisId, " done");
-			});
-		}
-
-		bool done, found;
+		bool done;
 		try
 		{
-			found = eventProcessor.emitProtocolRaw!(protocolMethod, (name, symbol, arguments, uda) {
+			foreach (h; handlers)
+			{
 				if (done)
-					return;
-
-				trace("Calling request method ", name);
-				alias RequestResultT = typeof(symbol(arguments.expand));
-
-				static if (is(RequestResultT : JsonValue))
+					break;
+				trace("Calling request method ", h.name);
+				final switch (h.kind)
 				{
-					auto requestResult = symbol(arguments.expand);
-					res.resultJson = requestResult.serializeJson;
-					done = true;
-					processRequestObservers(msg, requestResult);
-				}
-				else static if (!is(RequestResultT : _[], _)
-					&& isInputRange!RequestResultT)
-				{
-					handlePartialIterator(symbol, arguments);
-					return;
-				}
-				else
-				{
-					static if (is(RequestResultT : T[], T))
+				case RequestHandler.Kind.iterator:
+					working++;
+					pushFiber(fiberName ~ " (iterator)", {
+						scope (exit)
+							working--;
+						h.iterate(params, (string chunk) { addPartial(chunk); });
+					});
+					break;
+				case RequestHandler.Kind.array:
+					if (numHandlers > 1)
 					{
-						if (numHandlers > 1)
-						{
-							handlePartialWork(symbol, arguments);
-							return;
-						}
+						working++;
+						pushFiber(fiberName ~ " (partial)", {
+							scope (exit)
+								working--;
+							addPartial(h.call(params));
+						});
+						break;
 					}
-					else assert(numHandlers == 1, "Registered more than one "
-						~ msg.method ~ " handler on non-partial method returning "
-						~ RequestResultT.stringof);
-					auto requestResult = symbol(arguments.expand);
-					res.resultJson = requestResult.serializeJson;
+					goto case RequestHandler.Kind.single;
+				case RequestHandler.Kind.single:
+					assert(numHandlers == 1 || h.kind == RequestHandler.Kind.array,
+						"Registered more than one " ~ msg.method
+						~ " handler on a non-partial method");
+					res.resultJson = h.call(params);
 					done = true;
-					processRequestObservers(msg, requestResult);
+					break;
 				}
-			}, false)(msg.method, msg.paramsJson);
+			}
 		}
 		catch (MethodException e)
 		{
@@ -280,8 +238,6 @@ mixin template LanguageServerRouter(alias ExtensionModule, LanguageServerConfig 
 			res.error = e.error;
 			return res;
 		}
-
-		assert(found);
 
 		if (!done)
 		{
@@ -332,6 +288,9 @@ mixin template LanguageServerRouter(alias ExtensionModule, LanguageServerConfig 
 	// calls @postProtocolMethod methods for the given request
 	private void processRequestObservers(T)(RequestMessageRaw msg, T result)
 	{
+		// one instantiation per request result type: skip the whole method
+		// loop when no @postProtocolMethod observers exist (the usual case)
+		static if (eventProcessor.hasExtensionMethodsWithUDA!postProtocolMethod)
 		eventProcessor.emitProtocol!(postProtocolMethod, (name, callSymbol, uda) {
 			trace("Calling post-request method ", name);
 			try
@@ -370,17 +329,24 @@ mixin template LanguageServerRouter(alias ExtensionModule, LanguageServerConfig 
 		}
 		documents.process(msg);
 
-		bool gotAny = eventProcessor.emitProtocol!(protocolNotification, (name, callSymbol, uda) {
-			trace("Calling notification method ", name);
+		import served.utils.handlers : ensureProtocolHandlersRegistered, notificationHandlersFor;
+
+		ensureProtocolHandlersRegistered!(ExtensionModule, ExtensionModule.memberModules)();
+
+		auto notifyHandlers = notificationHandlersFor(msg.method);
+		const gotAny = notifyHandlers.length > 0;
+		foreach (h; notifyHandlers)
+		{
+			trace("Calling notification method ", h.name);
 			try
 			{
-				callSymbol();
+				h.call(msg.paramsJson);
 			}
 			catch (MethodException e)
 			{
 				error("Failed notify: ", e);
 			}
-		}, false)(msg.method, msg.paramsJson);
+		}
 
 		if (!gotAny)
 			trace("No handlers for notification: ", msg);
@@ -556,7 +522,7 @@ mixin template LanguageServerRouter(alias ExtensionModule, LanguageServerConfig 
 			while (rpc.hasData)
 			{
 				auto msg = rpc.poll;
-				// Log on client side instead! (vscode setting: "serve-d.trace.server": "verbose")
+				// Log on client side instead! (vscode setting: "serve-destiny.trace.server": "verbose")
 				//trace("Message: ", msg);
 				if (!msg.id.isNone)
 					pushFiber(msg.fiberName, gotRequest(msg));

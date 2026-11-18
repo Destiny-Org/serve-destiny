@@ -152,3 +152,7 @@ private string moduleNameForFile(string file, string dir, ref ubyte[] buffer)
 	else
 		return baseName(file).stripExtension;
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.file_search);

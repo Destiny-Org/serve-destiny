@@ -1,0 +1,42 @@
+# Installs the Destiny compiler (the destiny64 release package from
+# Destiny-Org/destiny) and DES (built from Destiny-Org/des), and
+# puts both on PATH. Linux x86_64 only: that is the only destiny64 package.
+name: Set up Destiny
+description: Install destiny64 and Destiny's dub
+inputs:
+  version:
+    description: destiny64 release tag, or "latest"
+    default: latest
+  build-dub:
+    description: build DES and put it on PATH
+    default: 'true'
+runs:
+  using: composite
+  steps:
+    - name: Download destiny64
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        set -euo pipefail
+        dir="$RUNNER_TOOL_CACHE/destiny64"
+        mkdir -p "$dir"
+        tag="${{ inputs.version }}"
+        [ "$tag" = latest ] && tag=""
+        gh release download $tag --repo Destiny-Org/destiny \
+          --pattern 'destiny64-*-linux.tar.xz' --dir "$RUNNER_TEMP" --clobber
+        tar -xJf "$RUNNER_TEMP"/destiny64-*-linux.tar.xz -C "$dir" --strip-components=1
+        echo "$dir/bin" >> "$GITHUB_PATH"
+        echo "DC=destiny" >> "$GITHUB_ENV"
+        "$dir/bin/destiny" --version | head -1
+
+    - name: Build DES (Destiny's dub)
+      if: inputs.build-dub == 'true'
+      shell: bash
+      run: |
+        set -euo pipefail
+        src="$RUNNER_TEMP/des"
+        git clone --depth 1 https://github.com/Destiny-Org/des.git "$src"
+        cd "$src"
+        DMD=destiny GITVER=v1.40.0-destiny destiny -revert=safedefault -run build.d -revert=safedefault -O
+        echo "$src/bin" >> "$GITHUB_PATH"

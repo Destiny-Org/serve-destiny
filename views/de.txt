@@ -36,7 +36,7 @@ dub.action.closeSettingsEditor: Projekteinstellungen schließen
 d.createProject: code-d: Neues Projekt erstellen
 d.action.createProject: Neues Projekt erstellen
 
-d.config.workspacedPath: Pfad zur ausführbaren workspace-d Datei. Kann leer gelassen werden wenn Datei im PATH enthalten ist oder über code-d installiert wurde.
+d.config.workspacedPath: Pfad zur ausführbaren workspace-destiny Datei. Kann leer gelassen werden wenn Datei im PATH enthalten ist oder über code-d installiert wurde.
 d.config.stdlibPath: Liste an Pfäden für phobos und D runtime für Autovervollständigung
 d.config.dcdClientPath: Pfad zur ausführbaren dcd-client Datei. Kann leer gelassen werden wenn Datei im PATH enthalten ist oder über code-d installiert wurde.
 d.config.dcdServerPath: Pfad zur ausführbaren dcd-server Datei. Kann leer gelassen werden wenn Datei im PATH enthalten ist oder über code-d installiert wurde.
@@ -65,10 +65,10 @@ d.config.dfmt.compactLabeledStatements: Labels auf die gleiche Zeile wie das bet
 d.config.dfmt.templateConstraintStyle: Formatierung von Template Constraints einstellen.
 
 d.ext.openUserSettings: Benutzereinstellungen öffnen
-d.ext.workspacedENOENT: workspace-d ist nicht installiert oder Pfad zeigt auf keine ausführbare Datei
+d.ext.workspacedENOENT: workspace-destiny ist nicht installiert oder Pfad zeigt auf keine ausführbare Datei
 d.ext.workspacedENOENT.retry: Wiederholen
-d.ext.workspacedENOENT.install: workspace-d installieren
-d.ext.workspacedCrash: workspace-d ist abgestürtzt. Falls der dcd-server Prozess noch läuft, bitte töten!
+d.ext.workspacedENOENT.install: workspace-destiny installieren
+d.ext.workspacedCrash: workspace-destiny ist abgestürtzt. Falls der dcd-server Prozess noch läuft, bitte töten!
 d.ext.workspaced.restart: Neustarten
 d.ext.importModule: {0} importieren
 d.ext.noImportPaths.project: Keine Import Pfäde für dieses Projekt. Autovervollständigung könnte nicht funktionieren!
@@ -78,12 +78,12 @@ d.ext.compilerFail: Compiler konnte nicht gewechselt werden
 d.ext.archFail: Architektur konnte nicht gewechselt werden
 d.ext.ultimateArchFail: Architektur konnte nicht gewechselt werden. In die Entwicklertools umschalten für Details.
 d.ext.dcdUpdateFail: Konnte DCD nicht anpassen. Bitte DCD neustarten falls es nicht korrekt funktioniert
-d.ext.workspacedUnresponsive: workspace-d reagiert nicht mehr. Autovervollständigung könnte nicht funktionieren!
-d.ext.workspacedUnkillable: workspace-d konnte nicht beendet werden. Bitte schließen Sie es manuell! PID: {0}
-d.ext.workspacedOutdated.major: workspace-d ist nicht mehr aktuell! Bitte updaten um das Plugin weiter zu benutzen. (erwartet={0}, workspaced={1})
-d.ext.workspacedOutdated.minor: workspace-d könnte nicht mehr aktuell sein! Bitte updaten wenn etwas nicht funktioniert wie erwartet. (erwartet={0}, workspaced={1})
-d.ext.workspacedOutdated.patch: workspace-d hat ein neues optionales Update! Bitte updaten vor dem Senden von Bug Reports. (erwartet={0}, workspaced={1})
-d.ext.workspacedOutdated.unknown: Konnte nicht die workspace-d version identifizieren. Bitte workspace-d updaten!
+d.ext.workspacedUnresponsive: workspace-destiny reagiert nicht mehr. Autovervollständigung könnte nicht funktionieren!
+d.ext.workspacedUnkillable: workspace-destiny konnte nicht beendet werden. Bitte schließen Sie es manuell! PID: {0}
+d.ext.workspacedOutdated.major: workspace-destiny ist nicht mehr aktuell! Bitte updaten um das Plugin weiter zu benutzen. (erwartet={0}, workspaced={1})
+d.ext.workspacedOutdated.minor: workspace-destiny könnte nicht mehr aktuell sein! Bitte updaten wenn etwas nicht funktioniert wie erwartet. (erwartet={0}, workspaced={1})
+d.ext.workspacedOutdated.patch: workspace-destiny hat ein neues optionales Update! Bitte updaten vor dem Senden von Bug Reports. (erwartet={0}, workspaced={1})
+d.ext.workspacedOutdated.unknown: Konnte nicht die workspace-destiny version identifizieren. Bitte workspace-destiny updaten!
 d.ext.workspacedOutdated.install: Neuste Version installieren
 d.ext.config.invalid.configuration: Die Konfiguration '{0}' welche in den Einstellungen angegeben wurde, wurde nicht gefunden!
 d.ext.config.invalid.archType: Die Architektur '{0}' welche in den Einstellungen angegeben wurde, wurde nicht gefunden!
@@ -116,7 +116,7 @@ d.ext.dcdRestarted: DCD-Server neugestartet
 d.ext.importsReloaded: Importpfäde erfolgreich neugeladen
 d.ext.importsEmpty: Keine Importpfäde vorhanden!
 d.ext.manualReloadFail: Konnte Importpfäde nicht neu laden. dub ist vielleicht noch nicht komplett initialisiert!
-d.ext.workspacedNotReady: workspace-d ist noch nicht bereit
+d.ext.workspacedNotReady: workspace-destiny ist noch nicht bereit
 d.ext.importAddFail: import konnte nicht hinzugefügt werden
 d.ext.rdmdTitle: rdmd Ausgabe
 d.ext.uploader.noCode: Keinen code ausgewählt
@@ -133,7 +133,7 @@ d.projects.reloadFail: Konnte Fenster nicht erneut laden. Bitte manuell neu lade
 d.projects.copyFail: Konnte Projekttemplate nicht kopieren
 d.projects.dubFail: Konnte dub.json Datei nicht generieren
 
-d.installer.noPrebuiltWorkspaced: Keine ausführbare workspace-d Datei für diese Platform/Architektur vorhanden
+d.installer.noPrebuiltWorkspaced: Keine ausführbare workspace-destiny Datei für diese Platform/Architektur vorhanden
 d.installer.noPrebuiltDub: Keine dub Version für die aktuelle Platform vorhanden
 d.installer.compileFromSource: Aus Quellcode Kompilieren
 d.installer.title: Installation von {0}

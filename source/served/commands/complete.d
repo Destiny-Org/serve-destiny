@@ -895,7 +895,7 @@ private bool isInComment(scope const(char)[] code, size_t at, WorkspaceD backend
 
 	import dparse.lexer : DLexer, LexerConfig, StringBehavior, tok;
 
-	// TODO: does this kind of token parsing belong in serve-d?
+	// TODO: does this kind of token parsing belong in serve-destiny?
 
 	LexerConfig config;
 	config.fileName = "stdin";
@@ -1372,7 +1372,7 @@ private void migrateLabelDetailsSupport(ref CompletionItem item)
 
 // === Protocol Notifications starting here ===
 
-/// Restarts all DCD servers started by this serve-d instance. Returns `true` once done.
+/// Restarts all DCD servers started by this serve-destiny instance. Returns `true` once done.
 @protocolMethod("served/restartServer")
 bool restartServer()
 {
@@ -1384,7 +1384,7 @@ bool restartServer()
 	return true;
 }
 
-/// Kills all DCD servers started by this serve-d instance.
+/// Kills all DCD servers started by this serve-destiny instance.
 @protocolNotification("served/killServer")
 void killServer()
 {
@@ -1393,7 +1393,7 @@ void killServer()
 			instance.get!DCDComponent.killServer();
 }
 
-/// Registers a snippet across the whole serve-d application which may be limited to given grammatical scopes.
+/// Registers a snippet across the whole serve-destiny application which may be limited to given grammatical scopes.
 /// Requires `--provide context-snippets`
 /// Returns: `false` if SnippetsComponent hasn't been loaded yet, otherwise `true`.
 @protocolMethod("served/addDependencySnippet")
@@ -1413,3 +1413,7 @@ bool addDependencySnippet(AddDependencySnippetParams params)
 	backend.get!SnippetsComponent.addDependencySnippet(params.requiredDependencies, snippet);
 	return true;
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.complete);

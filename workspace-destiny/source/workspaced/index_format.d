@@ -40,7 +40,7 @@ struct IndexCache
 			cachePath = tempDir;
 		}
 
-		cachePath = buildPath(cachePath, "serve-d");
+		cachePath = buildPath(cachePath, "serve-destiny");
 		if (!existsAndIsDir(cachePath))
 			mkdir(cachePath);
 		return buildPath(cachePath, "symbolindex.bin");

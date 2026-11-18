@@ -222,3 +222,7 @@ string determineDubPackageName(string directory)
 		packageName = packageName[0 .. $ - 1];
 	return packageName;
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.workers.rename_listener);

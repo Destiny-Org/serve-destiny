@@ -1,10 +1,10 @@
-# Using serve-d with [Nova][1]
+# Using serve-destiny with [Nova][1]
 ---
 
 ## Summary
 
 An extension for Nova called **D-Velop** is [available][2] via the normal
-extension facility.  This extension utilizes serve-d for LSP functionality.
+extension facility.  This extension utilizes serve-destiny for LSP functionality.
 
 Installing this will enable D support to work in Nova.
 
@@ -14,10 +14,10 @@ indentation features via the Tree-sitter [D grammar][3].
 ## Requirements
 
 **D-Velop** will offer to automatically download a suitable
-version of serve-d, and by default will notify you when new
+version of serve-destiny, and by default will notify you when new
 releases are available, and offer to update as appropriate.
 
-You can use your own installation of serve-d as well, but
+You can use your own installation of serve-destiny as well, but
 be advised that served version **0.8.0-beta.1 or newer** is
 required to operate with the extension
 

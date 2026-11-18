@@ -44,7 +44,7 @@ void downloadFileManual(string url, string title, string into, void delegate(str
 			InternetOpenUrlA, InternetReadFile, IRF_NO_WAIT, INTERNET_BUFFERSA,
 			HttpQueryInfoA, HTTP_QUERY_CONTENT_LENGTH;
 
-		auto handle = enforce(InternetOpenA("serve-d_release-downloader/Pure-D/serve-d",
+		auto handle = enforce(InternetOpenA("serve-destiny_release-downloader/Destiny-Org/serve-destiny",
 				INTERNET_OPEN_TYPE_PRECONFIG, null, null, 0), "Failed to open internet handle");
 		scope (exit)
 			InternetCloseHandle(handle);

@@ -17,15 +17,15 @@ ci_group_start() { in_ci && echo "::group::$1"; }
 ci_group_end()   { in_ci && echo "::endgroup::"; }
 
 
-echo "Compiling serve-d in release mode with ${DC}..."
-ci_group_start "Building serve-d"
+echo "Compiling serve-destiny in release mode with ${DC}..."
+ci_group_start "Building serve-destiny"
 
 pushd .. > /dev/null
 if [[ "$DC" == "dmd" ]]; then
     echo "(Debug build because using DMD)"
-    dub build --compiler="${DC}"
+    des build --compiler="${DC}"
 else
-    dub build --build=release --compiler="${DC}"
+    des build --build=release --compiler="${DC}"
 fi
 popd > /dev/null
 
@@ -54,7 +54,7 @@ for testCase in "${tests[@]}"; do
     # Optional: download and stage DCD binaries
     if [[ -f .needs_dcd ]]; then
         pushd ../data/dcd > /dev/null
-        "$DC" -I../../../workspace-d/source -run download_dcd.d
+        "$DC" -I../../../workspace-destiny/source -run download_dcd.d
         popd > /dev/null
 
         # Only copy if the binaries were actually produced
@@ -64,7 +64,7 @@ for testCase in "${tests[@]}"; do
     fi
 
     # Upgrade deps; failures are non-fatal (network may be unavailable in CI)
-    dub upgrade 2>&1 || true
+    des upgrade 2>&1 || true
 
     # Run the test; capture exit code without breaking set -e
     result=0

@@ -26,6 +26,11 @@ string[] autoDetectStdlibPaths(string cwd = null, string compilerPath = null)
 		auto binName = compilerPath.baseName.stripExtension;
 		switch (binName)
 		{
+		case "destiny":
+			trace("detecting destiny stdlib path from ", compilerPath);
+			if (detectDestinyStdlibPaths(cwd, ret, compilerPath))
+				return ret;
+			break;
 		case "dmd":
 			trace("detecting dmd stdlib path from ", compilerPath);
 			if (detectDMDStdlibPaths(cwd, ret, compilerPath))
@@ -49,7 +54,8 @@ string[] autoDetectStdlibPaths(string cwd = null, string compilerPath = null)
 	}
 
 	trace("falling back to global imports search");
-	if (detectDMDStdlibPaths(cwd, ret) || detectLDCStdlibPaths(cwd, ret))
+	if (detectDestinyStdlibPaths(cwd, ret) || detectDMDStdlibPaths(cwd, ret)
+			|| detectLDCStdlibPaths(cwd, ret))
 	{
 		trace("found stdlib paths in DMD or LDC: ", ret);
 		return ret;
@@ -70,6 +76,40 @@ string[] autoDetectStdlibPaths(string cwd = null, string compilerPath = null)
 			return [];
 		}
 	}
+}
+
+/// Destiny: import paths (druntime, Fate) from `destiny.conf`, which has the
+/// same format as dmd.conf. Looked for in `cwd`, `$HOME`, next to the
+/// compiler (a download keeps it in `destiny64/bin/`), and in /etc.
+bool detectDestinyStdlibPaths(string cwd, out string[] ret, string destinyPath = null)
+{
+	version (Windows)
+	{
+		static immutable confName = "sc.ini";
+		static immutable exe = "destiny.exe";
+	}
+	else
+	{
+		static immutable confName = "destiny.conf";
+		static immutable exe = "destiny";
+	}
+
+	bool tryConf(string dir)
+	{
+		return dir.length && fs.exists(chainPath(dir, confName))
+			&& parseDmdConfImports(buildPath(dir, confName), dir, ret);
+	}
+
+	if (tryConf(cwd) || tryConf(environment.get("HOME")))
+		return true;
+	if (!destinyPath.length || !fs.exists(destinyPath))
+		destinyPath = searchPathFor(exe);
+	if (destinyPath.length && tryConf(dirName(destinyPath)))
+		return true;
+	version (Posix)
+		return tryConf("/etc") || tryConf("/usr/local/etc");
+	else
+		return false;
 }
 
 bool detectDMDStdlibPaths(string cwd, out string[] ret, string dmdPath = null)

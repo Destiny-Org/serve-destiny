@@ -8,8 +8,8 @@ end
 function b
 	dub run :dml
 	dub build $argv
-	mv workspace-d ~/etc-bin/workspace-d
-	killall dcd-server; killall workspace-d
+	mv workspace-destiny ~/etc-bin/workspace-destiny
+	killall dcd-server; killall workspace-destiny
 end
 
 function r

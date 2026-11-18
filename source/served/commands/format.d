@@ -442,3 +442,7 @@ string uriToFile(DocumentUri uri)
 	TextEdit([Position(8, 18), Position(8, 18)], " ")
 ]);
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.format);

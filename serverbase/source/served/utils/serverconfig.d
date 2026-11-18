@@ -246,7 +246,7 @@ mixin template ConfigHandler(TConfig)
 			else
 			{
 				warning("This Language Client doesn't support configuration requests and also didn't send any "
-					~ "configuration to serve-d. Initializing using default configuration");
+					~ "configuration to serve-destiny. Initializing using default configuration");
 
 				emitExtensionEvent!onConfigChanged(ConfigWorkspace.unnamedWorkspace, null, globalConfiguration.config);
 			}

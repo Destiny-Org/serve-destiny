@@ -71,7 +71,7 @@ class DCDComponent : ComponentWrapper
 			|| checkVersion(installedVersion, BuiltinDCDClient
 				.maxSupportedServerExclusive))
 		{
-			trace("Using dcd-client instead of internal workspace-d client");
+			trace("Using dcd-client instead of internal workspace-destiny client");
 
 			string clientInstalledVersion = clientPath.getVersionAndFixPath;
 			string clientPathInfo = clientPath != "dcd-client" ? "(" ~ clientPath ~ ") " : "";
@@ -134,7 +134,7 @@ class DCDComponent : ComponentWrapper
 		return !checkVersion(installedVersion, latestKnownVersion);
 	}
 
-	/// During the runtime of this serve-d run, ignore DCD outdated warnings.
+	/// During the runtime of this serve-destiny run, ignore DCD outdated warnings.
 	void ignoreOutdatedForSession()
 	{
 		ignoreOutdatedThisSession = true;
@@ -219,7 +219,7 @@ class DCDComponent : ComponentWrapper
 
 		client.runningPort = port;
 		client.socketFile = buildPath(tempDir,
-			"workspace-d-sock" ~ thisProcessID.to!string ~ "-"
+			"workspace-destiny-sock" ~ thisProcessID.to!string ~ "-"
 				~ uniform!ulong.to!string(36));
 
 		string[] serverArgs;

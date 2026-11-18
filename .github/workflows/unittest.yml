@@ -5,87 +5,54 @@ on:
     - master
   pull_request:
 
+# Built and tested with Destiny only (destiny64 is packaged for Linux x86_64).
+# d-scanner and dub are path dependencies (see dub.selections.json), so they
+# are checked out next to this repository.
+env:
+  DFLAGS: -revert=safedefault -lowmem
+
 jobs:
   dubtest:
     name: Dub Tests
-    strategy:
-      fail-fast: false
-      matrix:
-        # ubuntu / linux must run on kinda old linux for glibc compatibility!
-        os: [ubuntu-22.04, windows-latest, macos-latest]
-        dc: [dmd-2.112.1, ldc-latest]
-        exclude:
-        - os: windows-latest
-          dc: dmd-2.112.1
-        - os: macos-latest
-          dc: dmd-2.112.1 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v7
-
-      - name: Install D compiler
-        uses: dlang-community/setup-dlang@v2
-        timeout-minutes: 5
         with:
-          compiler: ${{ matrix.dc }}
+          path: serve-destiny
+      - uses: actions/checkout@v7
+        with:
+          repository: Destiny-Org/d-scanner
+          path: d-scanner
+      - uses: actions/checkout@v7
+        with:
+          repository: Destiny-Org/des
+          path: des
 
-      - name: cache dependency binaries
-        uses: WebFreak001/dub-upgrade@v0.3.0
-
-      - name: Run workspace-d tests
-        run: dub test :workspace-d
-        timeout-minutes: 30
-        env:
-          MACOSX_DEPLOYMENT_TARGET: '10.12'
-
-      - name: serialization tests
-        run: dub test :protocol
-        timeout-minutes: 10
-        env:
-          # shouldn't break other OSes
-          MACOSX_DEPLOYMENT_TARGET: '10.12'
-
-      - name: DCD communication library tests
-        run: dub test :dcd
-        timeout-minutes: 5
-        env:
-          # shouldn't break other OSes
-          MACOSX_DEPLOYMENT_TARGET: '10.12'
-
-      - name: LSP tests
-        run: dub test :lsp
-        timeout-minutes: 10
-        env:
-          # shouldn't break other OSes
-          MACOSX_DEPLOYMENT_TARGET: '10.12'
-
-      - name: serverbase tests
-        run: dub test :serverbase
-        timeout-minutes: 10
-        env:
-          MACOSX_DEPLOYMENT_TARGET: '10.12'
-
-      - name: build minimal server
-        run: dub build --root=null_server
-        timeout-minutes: 10
-        env:
-          MACOSX_DEPLOYMENT_TARGET: '10.12'
-
-      - name: test minimal server
-        run: dub run --root=null_server_test
-        timeout-minutes: 10
-        env:
-          MACOSX_DEPLOYMENT_TARGET: '10.12'
+      - name: Install Destiny
+        uses: ./serve-destiny/.github/actions/setup-destiny
 
       - name: Run tests
-        run: dub test
-        timeout-minutes: 30
-        env:
-          MACOSX_DEPLOYMENT_TARGET: '10.12'
+        working-directory: serve-destiny
+        timeout-minutes: 60
+        run: |
+          set -e
+          for p in :workspace-destiny :protocol :dcd :lsp :serverbase; do
+            des test --compiler=destiny --build-mode=singleFile $p
+          done
+          des build --compiler=destiny --root=null_server
+          des run --compiler=destiny --root=null_server_test
+          des test --compiler=destiny --build-mode=singleFile
 
       - name: Run standalone tests
-        run: ./runtests.sh
-        working-directory: ./test
+        working-directory: serve-destiny/test
         timeout-minutes: 30
+        run: ./runtests.sh
+
+      - name: Editor smoke test
+        working-directory: serve-destiny
+        timeout-minutes: 15
+        run: |
+          ./ci/build.sh
+          python3 test/destiny_smoke.py ./serve-destiny test/data/destiny_smoke.d
         env:
-          MACOSX_DEPLOYMENT_TARGET: '10.12'
+          ARCH: x86_64

@@ -821,3 +821,7 @@ bool removeDependency(WorkspaceD.Instance instance, string name)
 		return true;
 	}
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.dub);

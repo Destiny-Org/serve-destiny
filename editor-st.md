@@ -1,4 +1,4 @@
-# Using serve-d with Sublime Text
+# Using serve-destiny with Sublime Text
 ---
 
 Requirments:
@@ -10,9 +10,9 @@ Client Configuration:
 ```json
 {
 	"clients": {
-		"serve-d": {
+		"serve-destiny": {
 			"enabled": true,
-			"command": ["C:/Users/MY_NAME_HERE/AppData/Roaming/code-d/bin/serve-d.exe"],
+			"command": ["C:/Users/MY_NAME_HERE/AppData/Roaming/code-d/bin/serve-destiny.exe"],
 			"selector": "source.d",
 			"settings": {
 				"d.dcdServerPath": "C:/Users/MY_NAME_HERE/AppData/Roaming/code-d/bin/dcd-server.exe",

@@ -564,6 +564,25 @@ mixin template EventProcessorCoreImpl(alias ExtensionModule, EventProcessorConfi
 		}
 	}
 
+	/// Whether any extension method has the UDA `UDA` (decided at compile
+	/// time). Lets callers skip instantiating handler loops that would find
+	/// nothing; without this, every request result type instantiated a full
+	/// loop over all methods for `@postProtocolMethod`, which made compiling
+	/// the server take several GB of memory.
+	enum bool hasExtensionMethodsWithUDA(alias UDA) = () {
+		bool any;
+		static foreach (mod; AliasSeq!(ExtensionModule, ExtensionModule.memberModules))
+			static foreach (name; __traits(allMembers, mod))
+			{{
+				alias symbols = AliasSeq!(__traits(getMember, mod, name));
+				static if (symbols.length == 1
+					&& __traits(getProtection, symbols[0]) == "public"
+					&& getUDAs!(symbols[0], UDA).length != 0)
+					any = true;
+			}}
+		return any;
+	}();
+
 	bool iterateExtensionMethodsByUDA(alias UDA, alias callback, bool returnFirst)()
 	{
 		bool found = false;

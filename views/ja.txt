@@ -36,7 +36,7 @@ dub.action.closeSettingsEditor: プロジェクト設定を閉じる
 d.createProject: code-d: 新しいプロジェクトを作成
 d.action.createProject: 新しいプロジェクトを作成
 
-d.config.workspacedPath: workspace-d のファイルのパスを設定します 環境変数PATHに設定されている、または code-d でインストールした場合は省略できます
+d.config.workspacedPath: workspace-destiny のファイルのパスを設定します 環境変数PATHに設定されている、または code-d でインストールした場合は省略できます
 d.config.stdlibPath: 標準ライブラリ(Phobos,D Runtime)のフルパスの配列を設定します、指定しない場合はオートコンプレートは動作できません
 d.config.dcdClientPath: dcd-client のファイルのパスを設定します 環境変数PATHに設定されている、または code-d でインストールした場合は省略できます
 d.config.dcdServerPath: dcd-server のファイルのパスを設定します 環境変数PATHに設定されている、または code-d でインストールした場合は省略できます
@@ -65,10 +65,10 @@ d.config.dfmt.compactLabeledStatements: dfmt switch, for, foreach, while文と�
 d.config.dfmt.templateConstraintStyle: dfmt template文のフォーマットの動作を指定します
 
 d.ext.openUserSettings: ユーザ設定を開く
-d.ext.workspacedENOENT: workspace-d が起動できません
+d.ext.workspacedENOENT: workspace-destiny が起動できません
 d.ext.workspacedENOENT.retry: リトライ
-d.ext.workspacedENOENT.install: workspace-d をインストールする
-d.ext.workspacedCrash: workspace-d クラッシュしました もし必要があれば dcd-server 再起動してください
+d.ext.workspacedENOENT.install: workspace-destiny をインストールする
+d.ext.workspacedCrash: workspace-destiny クラッシュしました もし必要があれば dcd-server 再起動してください
 d.ext.workspaced.restart: リスタート
 d.ext.importModule: Import {0}
 d.ext.noImportPaths.project: このプロジェクトで使用できるインポートパスはありません オートコンプリートが機能していない可能性があります
@@ -78,12 +78,12 @@ d.ext.compilerFail: コンパイラの設定を切り替えられませんでし
 d.ext.archFail: アーキテクチャタイプの設定を切り替えられませんでした
 d.ext.ultimateArchFail: アーキテクチャタイプの設定を切り替えることができませんでした 詳細については console を参照してください
 d.ext.dcdUpdateFail: DCDを更新できませんでした。 正しく動作しない場合はDCDを再起動してください
-d.ext.workspacedUnresponsive: workspace-d が応答しません オートコンプリートが機能していない可能性があります
-d.ext.workspacedUnkillable: workspace-d を強制終了できませんでした 手動で強制停止(kill)してください! PID: {0}
-d.ext.workspacedOutdated.major: workspace-d は古い可能性があります 更新してください (target={0}, workspaced={1})
-d.ext.workspacedOutdated.minor: workspace-d は古い可能性があります 正常に機能しない場合は更新してください (target={0}, workspaced={1})
-d.ext.workspacedOutdated.patch: workspace-d には新しいオプションのアップデートがあります！更新してください (target={0}, workspaced={1})
-d.ext.workspacedOutdated.unknown: workspace-d のバージョンを特定できませんでした workspace-d を更新してください！
+d.ext.workspacedUnresponsive: workspace-destiny が応答しません オートコンプリートが機能していない可能性があります
+d.ext.workspacedUnkillable: workspace-destiny を強制終了できませんでした 手動で強制停止(kill)してください! PID: {0}
+d.ext.workspacedOutdated.major: workspace-destiny は古い可能性があります 更新してください (target={0}, workspaced={1})
+d.ext.workspacedOutdated.minor: workspace-destiny は古い可能性があります 正常に機能しない場合は更新してください (target={0}, workspaced={1})
+d.ext.workspacedOutdated.patch: workspace-destiny には新しいオプションのアップデートがあります！更新してください (target={0}, workspaced={1})
+d.ext.workspacedOutdated.unknown: workspace-destiny のバージョンを特定できませんでした workspace-destiny を更新してください！
 d.ext.workspacedOutdated.install: 最新バージョンをインストールする
 d.ext.config.invalid.configuration: 指定された設定 '{0}' は利用できませんでした
 d.ext.config.invalid.archType: アーキテクチャタイプの設定 '{0}' は利用できませんでした
@@ -115,7 +115,7 @@ d.ext.dcdRestarted: dcd-server を再起動しました
 d.ext.importsReloaded: インポートパスの再読込みに成功しました
 d.ext.importsEmpty: インポートの読込みに失敗しました
 d.ext.manualReloadFail: インポートの更新ができませんでした dub の初期化に失敗した可能性があります
-d.ext.workspacedNotReady: workspace-d まだ準備ができていません
+d.ext.workspacedNotReady: workspace-destiny まだ準備ができていません
 d.ext.importAddFail: インポートの追加に失敗しました
 d.ext.rdmdTitle: rdmd アウトプット
 d.ext.uploader.noCode: ソースコードが選択されていません
@@ -132,7 +132,7 @@ d.projects.reloadFail: プロジェクトの再読み込みに失敗しました
 d.projects.copyFail: テンプレートのコピーに失敗しました
 d.projects.dubFail: dub.jsonの作成に失敗しました
 
-d.installer.noPrebuiltWorkspaced: このプラットフォーム用の workspace-d は用意されていません
+d.installer.noPrebuiltWorkspaced: このプラットフォーム用の workspace-destiny は用意されていません
 d.installer.noPrebuiltDub: このプラットフォームでは dub は用意されていません
 d.installer.compileFromSource: ソースからコンパイルする
 d.installer.title: インストール中 {0}

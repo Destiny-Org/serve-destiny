@@ -16,7 +16,7 @@ enum ProgressType
 {
 	/// default invalid/ignored value
 	unknown,
-	/// sent when serve-d is first registering all workspace-d components. Sent on first configLoad.
+	/// sent when serve-destiny is first registering all workspace-destiny components. Sent on first configLoad.
 	globalStartup,
 	/// sent before each workspace that is going to be loaded. Sent for every workspace.
 	/// sent with workspaceUri argument

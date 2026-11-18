@@ -18,7 +18,7 @@ ColorInformation[] provideDocumentColor(DocumentColorParams params)
 	ColorInformation[] ret;
 
 	{
-		// if we ever want to make serve-d multi-threaded, want to lock here
+		// if we ever want to make serve-destiny multi-threaded, want to lock here
 		// document.lock();
 		// scope (exit)
 		// 	document.unlock();
@@ -79,3 +79,7 @@ ColorPresentation[] provideColorPresentations(ColorPresentationParams params)
 
 	return [ColorPresentation(hex)];
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.color);

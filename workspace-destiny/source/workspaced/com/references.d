@@ -24,7 +24,7 @@ class ReferencesComponent : ComponentWrapper
 
 	/// Basic text-search-based references lookup.
 	/// Be careful with the delegate, as it is being called from another thread.
-	/// Do NOT call any other async workspace-d APIs from this callback as it
+	/// Do NOT call any other async workspace-destiny APIs from this callback as it
 	/// could result in a deadlock.
 	Future!References findReferences(string file, scope const(char)[] code, int pos,
 		void delegate(References) asyncFoundPart)

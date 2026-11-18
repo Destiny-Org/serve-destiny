@@ -156,7 +156,7 @@ if (AllowedTypes.length > 0)
 	Returns: error msg if any
 	*/
 	@safe pure scope
-	IonException deserializeFromIon(scope const char[][] symbolTable, IonDescribedValue value)
+	IonException deserializeFromIon(scope const char[][] symbolTable, scope IonDescribedValue value)
 	{
 		import mir.deser.ion : deserializeIon;
 		import mir.ion.type_code : IonTypeCode;
@@ -449,7 +449,7 @@ struct NullableOptional(T)
 	}
 
 	@trusted pure scope
-	IonException deserializeFromIon(scope const char[][] symbolTable, IonDescribedValue value)
+	IonException deserializeFromIon(scope const char[][] symbolTable, scope IonDescribedValue value)
 	{
 		import mir.deser.ion: deserializeIon;
 		import mir.ion.type_code : IonTypeCode;
@@ -798,7 +798,7 @@ enum ErrorCode
 	serverErrorStart = -32099,
 	/// Range end reserved for implementation-defined server-errors.
 	serverErrorEnd = -32000,
-	/// serve-d specific error: received method before server was fully
+	/// serve-destiny specific error: received method before server was fully
 	/// initialized.
 	serverNotInitialized = -32002,
 	///
@@ -1489,8 +1489,8 @@ unittest
 			"version":"1.68.0"
 		},
 		"locale":"en-gb",
-		"rootPath":"/home/webfreak/dev/serve-d",
-		"rootUri":"file:///home/webfreak/dev/serve-d",
+		"rootPath":"/home/webfreak/dev/serve-destiny",
+		"rootUri":"file:///home/webfreak/dev/serve-destiny",
 		"capabilities":{
 			"workspace":{
 				"applyEdit":true,
@@ -1673,8 +1673,8 @@ unittest
 		"trace":"off",
 		"workspaceFolders":[
 			{
-				"uri":"file:///home/webfreak/dev/serve-d",
-				"name":"serve-d"
+				"uri":"file:///home/webfreak/dev/serve-destiny",
+				"name":"serve-destiny"
 			}
 		]
 	}`.deserializeJson!InitializeParams;
@@ -1682,13 +1682,13 @@ unittest
 	assert(p.processId == 29980);
 	assert(p.clientInfo == InitializeParamsClientInfo("Code - OSS", "1.68.0".opt));
 	assert(p.locale == "en-gb");
-	assert(p.rootPath == "/home/webfreak/dev/serve-d");
-	assert(p.rootUri == "file:///home/webfreak/dev/serve-d");
+	assert(p.rootPath == "/home/webfreak/dev/serve-destiny");
+	assert(p.rootUri == "file:///home/webfreak/dev/serve-destiny");
 	assert(p.trace == "off");
 	auto folders = p.workspaceFolders.get.get; // double get cuz this one is special because it can be omitted as well as null
 	assert(folders.length == 1);
-	assert(folders[0].uri == "file:///home/webfreak/dev/serve-d");
-	assert(folders[0].name == "serve-d");
+	assert(folders[0].uri == "file:///home/webfreak/dev/serve-destiny");
+	assert(folders[0].name == "serve-destiny");
 }
 
 @serdeFallbackStruct
@@ -2638,7 +2638,7 @@ unittest
 			"level":"type",
 			"column":5,
 			"format":"dfmt args",
-			"uri":"file:///home/webfreak/dev/serve-d/source/served/lsp/protoext.d",
+			"uri":"file:///home/webfreak/dev/serve-destiny/source/served/lsp/protoext.d",
 			"line":305
 		}
 	}`;
@@ -2656,7 +2656,7 @@ unittest
 	assert(data["level"].get!string == "type");
 	assert(data["column"].get!long == 5);
 	assert(data["format"].get!string == "dfmt args");
-	assert(data["uri"].get!string == "file:///home/webfreak/dev/serve-d/source/served/lsp/protoext.d");
+	assert(data["uri"].get!string == "file:///home/webfreak/dev/serve-destiny/source/served/lsp/protoext.d");
 	assert(data["line"].get!long == 305);
 }
 
@@ -2759,7 +2759,7 @@ struct MarkedString
 	Returns: error msg if any
 	*/
 	@safe pure scope
-	IonException deserializeFromIon(scope const char[][] symbolTable, IonDescribedValue value)
+	IonException deserializeFromIon(scope const char[][] symbolTable, scope IonDescribedValue value)
 	{
 		import mir.deser.ion : deserializeIon;
 		import mir.ion.type_code : IonTypeCode;

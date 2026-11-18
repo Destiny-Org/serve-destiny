@@ -132,15 +132,15 @@ class DependencyBasedSnippetProvider : SnippetProvider
 unittest
 {
 	DependencySet set;
-	set.set(["vibe-d", "mir", "serve-d"]);
-	assert(set.hasAll(["vibe-d", "serve-d", "mir"]));
-	assert(set.hasAll(["vibe-d", "serve-d", "serve-d", "serve-d", "mir", "mir"]));
-	assert(set.hasAll(["vibe-d", "serve-d", "mir", "workspace-d"]));
-	assert(set.hasAll(["diet-ng", "vibe-d", "serve-d", "mir", "workspace-d"]));
-	assert(!set.hasAll(["diet-ng", "serve-d", "mir", "workspace-d"]));
-	assert(!set.hasAll(["diet-ng", "serve-d", "vibe-d", "workspace-d"]));
-	assert(!set.hasAll(["diet-ng", "mir", "mir", "vibe-d", "workspace-d"]));
-	assert(!set.hasAll(["diet-ng", "mir", "vibe-d", "workspace-d"]));
+	set.set(["vibe-d", "mir", "serve-destiny"]);
+	assert(set.hasAll(["vibe-d", "serve-destiny", "mir"]));
+	assert(set.hasAll(["vibe-d", "serve-destiny", "serve-destiny", "serve-destiny", "mir", "mir"]));
+	assert(set.hasAll(["vibe-d", "serve-destiny", "mir", "workspace-destiny"]));
+	assert(set.hasAll(["diet-ng", "vibe-d", "serve-destiny", "mir", "workspace-destiny"]));
+	assert(!set.hasAll(["diet-ng", "serve-destiny", "mir", "workspace-destiny"]));
+	assert(!set.hasAll(["diet-ng", "serve-destiny", "vibe-d", "workspace-destiny"]));
+	assert(!set.hasAll(["diet-ng", "mir", "mir", "vibe-d", "workspace-destiny"]));
+	assert(!set.hasAll(["diet-ng", "mir", "vibe-d", "workspace-destiny"]));
 
 	set.set(["vibe-d:http"]);
 	assert(set.hasAll([

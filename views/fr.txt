@@ -36,7 +36,7 @@ dub.action.closeSettingsEditor: Fermer les paramètres du projet
 d.createProject: code-d: Créer un nouveau projet
 d.action.createProject: Créer un nouveau projet
 
-d.config.workspacedPath: Chemin vers l'exécutable workspace-d. Peut être omis si présent dans $PATH ou installé par code-d
+d.config.workspacedPath: Chemin vers l'exécutable workspace-destiny. Peut être omis si présent dans $PATH ou installé par code-d
 d.config.stdlibPath: Tableau de chemins vers phobos et l'environement d'exécution D pour les inclure dans l'auto-complétion
 d.config.dcdClientPath: Chemin vers l'exécutable dcd-client. Peut être omis si présent dans $PATH ou installé par code-d
 d.config.dcdServerPath: Chemin vers l'exécutable dcd-server. Peut être omis si présent dans $PATH ou installé par code-d
@@ -65,10 +65,10 @@ d.config.dfmt.compactLabeledStatements: Placer les labels sur la même ligne que
 d.config.dfmt.templateConstraintStyle: Controlle le formattage des contraintes de template.
 
 d.ext.openUserSettings: Ouvrir les paramètres utilisateur
-d.ext.workspacedENOENT: workspace-d n'est pas installé ou pointe vers un répertoire
+d.ext.workspacedENOENT: workspace-destiny n'est pas installé ou pointe vers un répertoire
 d.ext.workspacedENOENT.retry: Réessayer
-d.ext.workspacedENOENT.install: Installer workspace-d
-d.ext.workspacedCrash: workspace-d a planté. Veuillez tuez dcd-server si nécesaire !
+d.ext.workspacedENOENT.install: Installer workspace-destiny
+d.ext.workspacedCrash: workspace-destiny a planté. Veuillez tuez dcd-server si nécesaire !
 d.ext.workspaced.restart: Redémarrer
 d.ext.importModule: Importer {0}
 d.ext.noImportPaths.project: Aucun chemin d'import disponible pour ce projet. L'autocomplétion peut ne pas fonctionner !
@@ -78,12 +78,12 @@ d.ext.compilerFail: Le compilateur n'a pas pu être changé
 d.ext.archFail: L'architecture n'a pas pu être changée
 d.ext.ultimateArchFail: Échec du changement d'architecture. Voir la console pour plus de détails.
 d.ext.dcdUpdateFail: DCD n'a pas pu être mis à jour. Veuillez redémarrer DCD s'il ne fonctionne pas correctement
-d.ext.workspacedUnresponsive: workspace-d ne répond pas. L'autocomplétion peut ne pas fonctionner !
-d.ext.workspacedUnkillable: workspace-d n'a pas pu être tué. Veuillez le tuer manuellement ! PID: {0}
-d.ext.workspacedOutdated.major: workspace-d est obsolète ! Veuillez le mettre à jour pour continuer à utiliser ce plugin. (cible={0}, workspaced={1})
-d.ext.workspacedOutdated.minor: workspace-d pourrait être obsolète ! Veuillez le mettre à jour si tout ne fonctionne pas comme il se devrait. (cible={0}, workspaced={1})
-d.ext.workspacedOutdated.patch: workspace-d a une nouvelle mise à jour disponible ! Veuillez le mettre à jour avant de soumettre un rapport de bogue. (cible={0}, workspaced={1})
-d.ext.workspacedOutdated.unknown: La version de workspace-d n'a pas pu être identifiée. Veuillez mettre à jour workspace-d !
+d.ext.workspacedUnresponsive: workspace-destiny ne répond pas. L'autocomplétion peut ne pas fonctionner !
+d.ext.workspacedUnkillable: workspace-destiny n'a pas pu être tué. Veuillez le tuer manuellement ! PID: {0}
+d.ext.workspacedOutdated.major: workspace-destiny est obsolète ! Veuillez le mettre à jour pour continuer à utiliser ce plugin. (cible={0}, workspaced={1})
+d.ext.workspacedOutdated.minor: workspace-destiny pourrait être obsolète ! Veuillez le mettre à jour si tout ne fonctionne pas comme il se devrait. (cible={0}, workspaced={1})
+d.ext.workspacedOutdated.patch: workspace-destiny a une nouvelle mise à jour disponible ! Veuillez le mettre à jour avant de soumettre un rapport de bogue. (cible={0}, workspaced={1})
+d.ext.workspacedOutdated.unknown: La version de workspace-destiny n'a pas pu être identifiée. Veuillez mettre à jour workspace-destiny !
 d.ext.workspacedOutdated.install: Installer la dernière version
 d.ext.config.invalid.configuration: La configuration '{0}' spécifiée dans la configuration n'est pas disponible !
 d.ext.config.invalid.archType: L'architecture '{0}' spécifiée dans la configuration n'est pas disponible !
@@ -114,7 +114,7 @@ d.ext.dcdRestarted: DCD-Server redémarré
 d.ext.importsReloaded: Chemins d'imports rechargés avec succès
 d.ext.importsEmpty: Les chemins d'imports sont vides !
 d.ext.manualReloadFail: Les imports n'ont pas pu être mis à jour. Dub peut ne pas être encore initialisé !
-d.ext.workspacedNotReady: workspace-d n'est pas encore prêt
+d.ext.workspacedNotReady: workspace-destiny n'est pas encore prêt
 d.ext.importAddFail: L'import n'a pas pu être ajouté
 d.ext.rdmdTitle: Sortie de rdmd
 d.ext.uploader.noCode: Pas de code sélectionné
@@ -131,7 +131,7 @@ d.projects.reloadFail: Échec du rechargement. Rechargez manuellement ou lancer 
 d.projects.copyFail: Échec de la copie de modèle
 d.projects.dubFail: Échec de la génération de dub.json
 
-d.installer.noPrebuiltWorkspaced: Pas de binaire workspace-d précompilé pour cette plateforme/architecture
+d.installer.noPrebuiltWorkspaced: Pas de binaire workspace-destiny précompilé pour cette plateforme/architecture
 d.installer.noPrebuiltDub: Dub n'est pas disponible pour cette plateforme
 d.installer.compileFromSource: Compiler depuis les sources
 d.installer.title: Progès d'installation de {0}

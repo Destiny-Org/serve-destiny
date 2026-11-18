@@ -32,7 +32,7 @@ class BasicTests : ServedInstancedTest
 		Fiber.yield();
 		rpc.notifyMethod("exit");
 		pumpEvents();
-		Thread.sleep(2.seconds); // give serve-d a chance to clean up
+		Thread.sleep(2.seconds); // give serve-destiny a chance to clean up
 		Fiber.yield();
 	}
 }

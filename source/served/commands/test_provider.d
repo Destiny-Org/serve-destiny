@@ -14,7 +14,7 @@ import std.path : baseName;
 import std.range;
 
 /// Set to true by app.d if `--provide test-runner` is given
-/// Makes serve-d emit unittests on every save
+/// Makes serve-destiny emit unittests on every save
 __gshared bool doTrackTests = false;
 
 UnittestProject[DocumentUri] projectTests;
@@ -193,3 +193,7 @@ private void rescanProject(WorkspaceD.Instance instance)
 		sw.peek);
 }
 
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.test_provider);

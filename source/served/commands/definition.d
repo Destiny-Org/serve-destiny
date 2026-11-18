@@ -140,7 +140,27 @@ Hover provideHover(TextDocumentPositionParams params)
 				cast(int) document.positionToBytes(params.position), false);
 		result.declaration = result.declaration.strip;
 		if (result.declaration.length)
-			marked = MarkedString(result.declaration, "d") ~ marked;
+		{
+			import served.commands.destiny_hover : destinySafetyNote;
+
+			// Destiny: say which safety applies (usually the unwritten default)
+			string before;
+			const line = result.location.range.start.line;
+			string source = result.location.uri == document.uri ? document.rawText.idup
+				: (fs.exists(result.location.uri.uriToFile)
+					? fs.readText(result.location.uri.uriToFile) : null);
+			size_t n, end;
+			foreach (l; source.lineSplitter!(KeepTerminator.yes))
+			{
+				if (n++ == line)
+					break;
+				end += l.length;
+			}
+			before = source[0 .. end];
+			auto note = destinySafetyNote(result.declaration, before);
+			marked = MarkedString(result.declaration, "d")
+				~ (note.length ? [MarkedString(note)] : null) ~ marked;
+		}
 	}
 	catch (Exception e)
 	{
@@ -150,3 +170,7 @@ Hover provideHover(TextDocumentPositionParams params)
 	ret.contents = marked;
 	return ret;
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.definition);

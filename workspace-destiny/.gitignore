@@ -6,7 +6,7 @@ __dummy.html
 /util/__test__library__
 /test/workspace-d_test
 *.a
-/workspace-d
+/workspace-destiny
 docs/
 bin/
 iworkspaced
@@ -14,8 +14,8 @@ workspace-d_dml
 debs/
 *.exe
 *.dll
-workspace-d*.zip
-workspace-d*.tar.xz
+workspace-destiny*.zip
+workspace-destiny*.tar.xz
 __test__*__
 *-test-*
 .vscode/

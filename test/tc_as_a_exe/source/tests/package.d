@@ -118,7 +118,7 @@ abstract class ServedInstancedTest : ServedTest
 		while (rpc.state != Fiber.State.TERM);
 		assert(testMethod.state == Fiber.State.TERM);
 		auto exitCode = proc.pid.wait;
-		assert(exitCode == 0, "serve-d failed with exit code " ~ exitCode.to!string);
+		assert(exitCode == 0, "serve-destiny failed with exit code " ~ exitCode.to!string);
 	}
 
 	abstract void runImpl();

@@ -176,3 +176,7 @@ DocumentSymbolInfo[] provideDocumentSymbolsHierarchical(DocumentSymbolParams par
 	documentSymbolsCacheHierarchical.store(documents.tryGet(params.textDocument.uri), ret);
 	return ret;
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.symbol_search);

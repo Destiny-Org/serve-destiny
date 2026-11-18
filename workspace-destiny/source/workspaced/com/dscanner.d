@@ -258,7 +258,7 @@ class DscannerComponent : ComponentWrapper
 
 	/// Takes line & column from the D-Scanner issue array and resolves the
 	/// start & end locations for the issues by changing the values in-place.
-	/// In the JSON RPC this returns the modified array, in workspace-d as a
+	/// In the JSON RPC this returns the modified array, in workspace-destiny as a
 	/// library this changes the parameter values in place.
 	void resolveRanges(scope const(char)[] code, scope ref DScannerIssue[] issues)
 	{
@@ -447,9 +447,9 @@ class DscannerComponent : ComponentWrapper
 	///         relative, this function will try both in getcwd and in the
 	///         instance.cwd, if an instance is set.
 	///   skipWorkspacedPaths = if true, don't attempt to override the given ini
-	///         with workspace-d user configs.
+	///         with workspace-destiny user configs.
 	///   defaultConfig = default D-Scanner configuration to use if no user
-	///         config exists (workspace-d specific or ini argument)
+	///         config exists (workspace-destiny specific or ini argument)
 	StaticAnalysisConfig getConfig(string ini = "dscanner.ini",
 		bool skipWorkspacedPaths = false,
 		const StaticAnalysisConfig defaultConfig = StaticAnalysisConfig.init)
@@ -464,7 +464,7 @@ class DscannerComponent : ComponentWrapper
 			static bool didWarn = false;
 			if (!didWarn)
 			{
-				warning("Overriding Dscanner ini with workspace-d dscanner.ini config file");
+				warning("Overriding Dscanner ini with workspace-destiny dscanner.ini config file");
 				didWarn = true;
 			}
 		}

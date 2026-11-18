@@ -48,3 +48,7 @@ private FoldingRangeKind mapFoldingRangeKind(FoldingRangeType type)
 		case region: return FoldingRangeKind.region;
 	}
 }
+
+// register this module's @protocolMethod / @protocolNotification functions
+import served.utils.handlers : RegisterProtocolHandlers;
+mixin RegisterProtocolHandlers!(served.commands.folding);

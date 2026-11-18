@@ -757,6 +757,6 @@ version (unittest)
 		import std.random;
 
 		return TestingWorkspace(buildPath(tempDir,
-				"workspace-d-test-" ~ uniform(0, long.max).to!string(36)));
+				"workspace-destiny-test-" ~ uniform(0, long.max).to!string(36)));
 	}
 }

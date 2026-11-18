@@ -16,3 +16,6 @@ __dummy.html
 /bin/
 *.lst
 /build/
+
+# documentation is kept locally, not on GitHub
+docs/

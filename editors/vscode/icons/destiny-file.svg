@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+  <!-- Destiny file icon for editors (file trees, tabs): the shard alone, on a
+       transparent background, so it works with light and dark editor themes. -->
+  <path d="M8 1 L3.6 8 L8 15 Z" fill="#E8E2CF"/>
+  <path d="M8 1 L12.4 8 L8 15 Z" fill="#D9B86A"/>
+  <path d="M8 1 V15" stroke="#8F6424" stroke-width="0.8"/>
+  <path d="M8 1 L3.6 8 L8 15 L12.4 8 Z" fill="none" stroke="#8F6424" stroke-width="0.6" stroke-linejoin="round"/>
+</svg>

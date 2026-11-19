@@ -163,7 +163,7 @@ private struct CompileCommand
 
 		if (args.length <= 1)
 			return false;
-		if (!file.endsWith(".d"))
+		if (!file.endsWith(".dd", ".d"))
 			return false;
 		return true;
 	}

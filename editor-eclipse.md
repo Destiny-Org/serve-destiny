@@ -10,11 +10,12 @@ Put `serve-destiny`, `destiny` and `des` on your `PATH` first.
 1. **Tell Eclipse what a Destiny file is.**
    Window → Preferences → General → Content Types → select **Text** →
    Add Child… → name it `Destiny source`. With it selected, under
-   *File associations* click Add… and enter `*.d`, then again for `*.di`.
+   *File associations* click Add… and enter `*.dd`, then again for `*.ddi`
+   (and `*.d` / `*.di` if you also open D files).
 
 2. **Open those files in the Generic Editor.**
-   Preferences → General → Editors → File Associations → add `*.d` (and
-   `*.di`) and set **Generic Text Editor** as the default.
+   Preferences → General → Editors → File Associations → add `*.dd` (and
+   `*.ddi`) and set **Generic Text Editor** as the default.
 
 3. **Create a launcher for serve-destiny.**
    Run → External Tools → External Tools Configurations… → Program → New.
@@ -25,7 +26,7 @@ Put `serve-destiny`, `destiny` and `des` on your `PATH` first.
    Preferences → Language Servers → Add… → pick the `Destiny source` content
    type and the `serve-destiny` launch configuration → OK.
 
-Open a `.d` file: errors (with their `fix:` hints), quick fixes, hover,
+Open a `.dd` file: errors (with their `fix:` hints), quick fixes, hover,
 completion and go-to-definition now come from serve-destiny.
 
 Syntax colouring is separate from the language server. For it, install

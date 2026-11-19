@@ -20,6 +20,17 @@ own checks.
 
 ## Usage
 
+Destiny source files end in `.dd` and interface files in `.ddi` (D's `.d` and
+`.di` also work). Associate those extensions with Destiny in your editor; in
+VS Code, add to your settings:
+
+```json
+"files.associations": { "*.dd": "destiny", "*.ddi": "destiny" }
+```
+
+**VS Code:** install the Destiny extension from
+[`editors/vscode`](editors/vscode) (file icon, highlighting, and this server).
+
 Any editor with an LSP client can run `serve-destiny` over stdio. Guides for
 some editors:
 
@@ -827,4 +838,5 @@ Report issues at https://github.com/Destiny-Org/serve-destiny/issues.
 
 ## License
 
-MIT; see [LICENSE](LICENSE).
+Mozilla Public License 2.0; see [LICENSE](LICENSE) and [NOTICE](NOTICE). The original
+serve-d files stay under the MIT License ([LICENSE-MIT](LICENSE-MIT)).

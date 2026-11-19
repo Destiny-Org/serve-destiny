@@ -12,7 +12,7 @@ local lsp = require "plugins.lsp"
 lsp.add_server {
   name = "serve-destiny",
   language = "d",
-  file_patterns = { "%.d$" },
+  file_patterns = { "%.dd$", "%.ddi$", "%.d$" },
   command = { "serve-destiny" },
   incremental_changes = true,
 }
@@ -26,7 +26,7 @@ local lsp = require "plugins.lsp"
 lsp.add_server {
   name = "serve-destiny",
   language = "d",
-  file_patterns = { "%.d$" },
+  file_patterns = { "%.dd$", "%.ddi$", "%.d$" },
   command = { "serve-destiny" },
   incremental_changes = true,
   settings = {

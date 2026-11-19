@@ -70,23 +70,23 @@ template ContainerStorageType(T)
 }
 
 ///
-unittest
-{
+@system unittest
+{ // Destiny: tests manual-memory code (D default)
 	static assert (is (ContainerStorageType!(int) == int));
 	static assert (is (ContainerStorageType!(const int) == int));
 }
 
 ///
-unittest
-{
+@system unittest
+{ // Destiny: tests manual-memory code (D default)
 	import std.typecons : Rebindable;
 	static assert (is (ContainerStorageType!(Object) == Object));
 	static assert (is (ContainerStorageType!(const(Object)) == Rebindable!(const(Object))));
 }
 
 ///
-unittest
-{
+@system unittest
+{ // Destiny: tests manual-memory code (D default)
 	struct A { int foo; }
 	struct B { void opAssign(typeof(this)) { this.foo *= 2; }  int foo;}
 
@@ -107,7 +107,7 @@ unittest
 }
 
 ///
-unittest
-{
+@system unittest
+{ // Destiny: tests manual-memory code (D default)
 	static assert (is (ContainerStorageType!(const(int*)) == const(int)*));
 }

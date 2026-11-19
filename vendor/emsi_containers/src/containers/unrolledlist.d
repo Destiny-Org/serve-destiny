@@ -619,7 +619,7 @@ private:
 	}
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.algorithm : equal;
 	import std.range : iota;
@@ -679,7 +679,7 @@ version(emsi_containers_unittest) unittest
 	assert (l3.empty);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	struct A { int a; int b; }
 	UnrolledList!(const(A)) objs;
@@ -688,7 +688,7 @@ version(emsi_containers_unittest) unittest
 	static assert (is (typeof(objs[].front) == const));
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static class A
 	{
@@ -707,7 +707,7 @@ version(emsi_containers_unittest) unittest
 }
 
 // Issue #52
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	UnrolledList!int list;
 	list.insert(0);
@@ -724,7 +724,7 @@ version(emsi_containers_unittest) unittest
 }
 
 // Issue #53
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	UnrolledList!int ints;
 	ints.insertBack(0);
@@ -738,7 +738,7 @@ version(emsi_containers_unittest) unittest
 }
 
 // Issue #168
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.typecons : RefCounted;
 	alias E = RefCounted!int;
@@ -752,7 +752,7 @@ version(emsi_containers_unittest) unittest
 }
 
 // Issue #170
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static struct S { @disable this(this); }
 	UnrolledList!S list;

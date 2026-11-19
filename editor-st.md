@@ -29,3 +29,7 @@ Client Configuration:
 	}
 }
 ```
+
+Destiny files end in `.dd` (interface files in `.ddi`): open one, then use
+View → Syntax → Open all with current extension as… → D, so Sublime Text
+uses the D syntax (`source.d`) for them.

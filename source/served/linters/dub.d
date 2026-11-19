@@ -40,7 +40,7 @@ string fixPath(string cwd, string workspaceRoot, string path, string[] stringImp
 		absPath = buildNormalizedPath(workspaceRoot, path);
 
 	// .d files are always emitted by the compiler, just use them
-	if (path.endsWith(".d"))
+	if (path.endsWith(".dd", ".d")) // Destiny: .dd, or D's .d
 		path = absPath;
 	else if (!isAbsolute(path))
 	{

@@ -116,7 +116,7 @@ void markRecentFileOpened(DidOpenTextDocumentParams params)
 void onFullyCreate(DocumentUri uri)
 {
 	trace("handle file creation/rename for ", uri);
-	if (uri.endsWith(".d"))
+	if (uri.endsWith(".dd", ".d"))
 		return onFullyCreateDSource(uri);
 
 	auto file = baseName(uri);

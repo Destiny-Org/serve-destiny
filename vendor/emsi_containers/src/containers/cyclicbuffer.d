@@ -479,7 +479,7 @@ version(emsi_containers_unittest) private
 	}
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static void test(int size)
 	{
@@ -524,7 +524,7 @@ version(emsi_containers_unittest) unittest
 		test(size);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static void test(int prefix, int suffix, int newSize)
 	{
@@ -547,7 +547,7 @@ version(emsi_containers_unittest) unittest
 		test(a, b, c);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	int* a = new int;
 	{
@@ -572,7 +572,7 @@ version(emsi_containers_unittest) unittest
 	assert(*a == 21);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	int* a = new int;
 	CyclicBuffer!C b;
@@ -599,7 +599,7 @@ version(emsi_containers_unittest) unittest
 	assert(*a == 0 || *a == 1);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	CyclicBuffer!int b;
 	b.insertFront(10);
@@ -620,7 +620,7 @@ version(emsi_containers_unittest) unittest
 	assert(b[3] == 7);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.range : isInputRange, isForwardRange, isBidirectionalRange, isRandomAccessRange;
 	CyclicBuffer!int b;
@@ -630,13 +630,13 @@ version(emsi_containers_unittest) unittest
 	static assert(isRandomAccessRange!(typeof(b[])));
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	CyclicBuffer!int b;
 	assert(b[].empty);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	FreeList!(Mallocator, 0, 64) alloc;
 	FreeList!(GCAllocator, 0, 64) alloc2;
@@ -645,7 +645,7 @@ version(emsi_containers_unittest) unittest
 	auto b3 = CyclicBuffer!(int, GCAllocator)();
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static void testConst(const ref CyclicBuffer!int b, int x)
 	{
@@ -676,7 +676,7 @@ version(emsi_containers_unittest) unittest
 	assert(b[][0] == 5);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	int* a = new int;
 	{
@@ -700,7 +700,7 @@ version(emsi_containers_unittest) unittest
 	assert(*a == 10);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	CyclicBuffer!int b;
 	foreach (i; 0 .. 4)
@@ -714,7 +714,7 @@ version(emsi_containers_unittest) unittest
 	assert(equal(b[], [2, 3, 4, 5]));
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	CyclicBuffer!int b;
 	foreach (i; 0 .. 4)
@@ -730,7 +730,7 @@ version(emsi_containers_unittest) unittest
 	assert(equal(b[], [3, 4, 5, 6]));
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static void test(ref CyclicBuffer!int b)
 	{
@@ -784,7 +784,7 @@ version(emsi_containers_unittest) unittest
 	}
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	CyclicBuffer!int b;
 	foreach (i; 0 .. 10)
@@ -794,7 +794,7 @@ version(emsi_containers_unittest) unittest
 	assert(b.capacity >= 12);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	CyclicBuffer!int b;
 	foreach (i; 0 .. 6)
@@ -806,7 +806,7 @@ version(emsi_containers_unittest) unittest
 	assert(equal(b[], [7, 6, 0, 1, 2, 3, 4, 5]));
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
     static class Foo
     {

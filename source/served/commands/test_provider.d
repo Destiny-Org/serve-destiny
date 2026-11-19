@@ -51,7 +51,7 @@ void onDidSaveCheckForUnittest(DidSaveTextDocumentParams params)
 	if (!doTrackTests)
 		return;
 
-	if (!params.textDocument.uri.endsWith(".d"))
+	if (!params.textDocument.uri.endsWith(".dd", ".d"))
 		return;
 
 	auto instance = backend.getBestInstance!DubComponent(params.textDocument.uri);
@@ -155,7 +155,7 @@ private void rescanProject(WorkspaceD.Instance instance)
 	foreach (path; settings.sourceFiles)
 	{
 		auto fullPath = buildNormalizedPath(settings.packagePath, path);
-		if (!fullPath.endsWith(".d", ".dpp", ".di"))
+		if (!fullPath.endsWith(".dd", ".ddi", ".d", ".dpp", ".di"))
 			continue;
 
 		auto uri = fullPath.uriFromFile;

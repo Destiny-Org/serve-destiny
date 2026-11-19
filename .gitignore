@@ -19,3 +19,7 @@ __dummy.html
 
 # documentation is kept locally, not on GitHub
 docs/
+
+# VS Code extension build output
+editors/vscode/node_modules/
+editors/vscode/*.vsix

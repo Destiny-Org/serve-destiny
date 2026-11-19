@@ -74,8 +74,8 @@ template ContainerElementType(ContainerType, ElementType, bool isRef = false)
 	}
 }
 
-unittest
-{
+@system unittest
+{ // Destiny: tests manual-memory code (D default)
 	static struct Container {}
 	static struct Data1 { int* x; }
 	static class Data2 { int* x; }

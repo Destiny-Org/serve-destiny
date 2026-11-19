@@ -42,7 +42,7 @@ class ModulemanComponent : ComponentWrapper
 		auto to = rename.split('.');
 		foreach (file; dirEntries(instance.cwd, SpanMode.depth))
 		{
-			if (file.extension != ".d")
+			if (file.extension != ".dd" && file.extension != ".d")
 				continue;
 			string code = readText(file);
 			auto tokens = getTokensForParser(cast(ubyte[]) code, config, &workspaced.stringCache);

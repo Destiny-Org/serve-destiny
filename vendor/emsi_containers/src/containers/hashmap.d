@@ -239,7 +239,7 @@ struct HashMap(K, V, Allocator = Mallocator, alias hashFunction = generateHash!K
 	/**
 	 * Returns: a range of the keys in this map.
 	 */
-	auto byKey(this This)() inout @trusted
+	auto byKey(this This)() inout return scope @trusted // Destiny: the range borrows the map
 	{
 		return MapRange!(This, IterType.key)(cast(Unqual!(This)*) &this);
 	}
@@ -268,7 +268,7 @@ struct HashMap(K, V, Allocator = Mallocator, alias hashFunction = generateHash!K
 	/**
 	 * Returns: a range of the values in this map.
 	 */
-	auto byValue(this This)() inout @trusted
+	auto byValue(this This)() inout return scope @trusted // Destiny: the range borrows the map
 	{
 		return MapRange!(This, IterType.value)(cast(Unqual!(This)*) &this);
 	}
@@ -300,7 +300,7 @@ struct HashMap(K, V, Allocator = Mallocator, alias hashFunction = generateHash!K
 	 * Returns: a range of the kev/value pairs in this map. The element type of
 	 *     this range is a struct with `key` and `value` fields.
 	 */
-	auto byKeyValue(this This)() inout @trusted
+	auto byKeyValue(this This)() inout return scope @trusted // Destiny: the range borrows the map
 	{
 		return MapRange!(This, IterType.both)(cast(Unqual!(This)*) &this);
 	}
@@ -605,8 +605,8 @@ private:
 }
 
 ///
-unittest
-{
+@system unittest
+{ // Destiny: tests manual-memory code (D default)
 	import std.uuid : randomUUID;
 	import std.range.primitives : walkLength;
 
@@ -654,7 +654,7 @@ unittest
 	assert(*pValue == 1);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static class Foo
 	{
@@ -678,7 +678,7 @@ version(emsi_containers_unittest) unittest
 }
 
 // Issue #54
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	HashMap!(string, int) map;
 	map.insert("foo", 0);
@@ -695,7 +695,7 @@ version(emsi_containers_unittest) unittest
 		assert(value == 1);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	HashMap!(int, int, Mallocator, (int i) => i) map;
 	auto p = map.getOrAdd(1, 1);
@@ -704,7 +704,7 @@ version(emsi_containers_unittest) unittest
 	assert(map[1] == 2);
 }
 
-debug (EMSI_CONTAINERS) version(emsi_containers_unittest) unittest
+debug (EMSI_CONTAINERS) version(emsi_containers_unittest) @system unittest
 {
 	import std.uuid : randomUUID;
 	import std.algorithm.iteration : walkLength;
@@ -730,7 +730,7 @@ debug (EMSI_CONTAINERS) version(emsi_containers_unittest) unittest
 }
 
 // #74
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	HashMap!(string, size_t) aa;
 	aa["b"] = 0;
@@ -739,14 +739,14 @@ version(emsi_containers_unittest) unittest
 }
 
 // storeHash == false
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static struct S { size_t v; }
 	HashMap!(S, S, Mallocator, (S s) { return s.v; }, false, false) aa;
 	static assert(aa.Node.sizeof == 2 * S.sizeof);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	auto hm = HashMap!(string, int)(16);
 
@@ -785,13 +785,13 @@ version(emsi_containers_unittest) unittest
 	assert(hm["a"] == 2);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static struct S { @disable this(this); }
 	alias HM = HashMap!(int, S);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	struct S { int* a; }
 	alias HM = HashMap!(S, int);

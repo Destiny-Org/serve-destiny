@@ -310,7 +310,7 @@ private:
 	}
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.string : format;
 	import std.algorithm : equal, sort;
@@ -357,7 +357,7 @@ version(emsi_containers_unittest) unittest
 	assert (ohs.remove(1));
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static class Foo
 	{

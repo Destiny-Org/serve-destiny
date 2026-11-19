@@ -302,7 +302,7 @@ private:
 	size_t _length;
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.string : format;
 	import std.algorithm : canFind;
@@ -321,7 +321,7 @@ version(emsi_containers_unittest) unittest
 	assert (l.length == 2);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static class Foo
 	{

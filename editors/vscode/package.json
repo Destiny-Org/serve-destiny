@@ -1,0 +1,84 @@
+{
+  "name": "destiny",
+  "displayName": "Destiny",
+  "description": "Destiny programming language: syntax highlighting, file icon, and errors with fix hints, completion and hover from serve-destiny",
+  "version": "0.1.0",
+  "publisher": "destiny-org",
+  "license": "MPL-2.0",
+  "icon": "icons/destiny-logo.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Destiny-Org/serve-destiny"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Formatters"
+  ],
+  "keywords": [
+    "destiny",
+    "dd",
+    "language server"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "languages": [
+      {
+        "id": "destiny",
+        "aliases": [
+          "Destiny",
+          "destiny"
+        ],
+        "extensions": [
+          ".dd",
+          ".ddi"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/destiny-file.svg",
+          "dark": "./icons/destiny-file.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "destiny",
+        "scopeName": "source.destiny",
+        "path": "./syntaxes/destiny.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "Destiny",
+      "properties": {
+        "destiny.serverPath": {
+          "type": "string",
+          "default": "serve-destiny",
+          "description": "Path to the serve-destiny language server (the name alone if it is on your PATH)."
+        },
+        "destiny.compilerPath": {
+          "type": "string",
+          "default": "destiny",
+          "description": "Path to the destiny compiler, passed to serve-destiny."
+        },
+        "destiny.desPath": {
+          "type": "string",
+          "default": "des",
+          "description": "Path to des, the Destiny package manager, passed to serve-destiny."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "vscode-languageclient": "9.0.1"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "3.2.1"
+  }
+}

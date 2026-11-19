@@ -281,7 +281,7 @@ version(emsi_containers_unittest) @system unittest
 	assert(tm.get("test4", "something") == "something");
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.range.primitives : walkLength;
 	import std.stdio : stdout;
@@ -302,7 +302,7 @@ version(emsi_containers_unittest) unittest
 	assert(allocator.bytesUsed == 0);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.algorithm.comparison : equal;
 	import std.algorithm.iteration : each;
@@ -315,7 +315,7 @@ version(emsi_containers_unittest) unittest
 	assert(equal(tm.values, repeat(0).take(a.length)));
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static class Foo
 	{
@@ -328,7 +328,7 @@ version(emsi_containers_unittest) unittest
 }
 
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.uuid : randomUUID;
 	import std.range.primitives : walkLength;
@@ -373,7 +373,7 @@ version(emsi_containers_unittest) unittest
 	assert(pValue == 1);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static class Foo
 	{
@@ -397,7 +397,7 @@ version(emsi_containers_unittest) unittest
 }
 
 // Issue #54
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	TreeMap!(string, int) map;
 	map.insert("foo", 0);
@@ -414,14 +414,14 @@ version(emsi_containers_unittest) unittest
 		assert(value == 1);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	TreeMap!(int, int) map;
 	auto p = map.getOrAdd(1, 1);
 	assert(*p == 1);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.uuid : randomUUID;
 	import std.range.primitives : walkLength;

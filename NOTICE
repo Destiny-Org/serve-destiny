@@ -1,0 +1,15 @@
+serve-destiny, the Destiny language server
+Copyright 2026 Destiny-Org and the Destiny contributors
+
+Licensed under the Mozilla Public License 2.0 (see LICENSE). New code and
+changes made for Destiny are under the MPL 2.0: anyone who distributes a
+modified version of these files must publish those files under the MPL 2.0.
+
+serve-destiny is based on serve-d (Copyright 2017-2023 Jan Jurzitza and
+contributors). Those original files remain under the MIT License, whose
+text is in LICENSE-MIT; their copyright notices are kept in each file.
+
+"Destiny" and the Destiny name, as applied to this programming language and
+its tools, are trademarks of Destiny-Org. The license does not grant
+permission to use them (MPL-2.0 section 2.3); a modified version must use a
+different name.

@@ -101,3 +101,12 @@ vim.lsp.config('serve_d', {
   },
 })
 ```
+
+## Destiny file types
+
+Destiny source files end in `.dd` (interface files in `.ddi`). Tell Vim they
+use the `d` file type, so the settings above apply to them:
+
+```vim
+autocmd BufRead,BufNewFile *.dd,*.ddi set filetype=d
+```

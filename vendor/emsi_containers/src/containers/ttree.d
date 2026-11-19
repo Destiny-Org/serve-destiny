@@ -573,6 +573,15 @@ private:
 
 	static struct Node
 	{
+		// Destiny: every Node is allocated by the tree's allocator, never on the
+		// stack, so its address stays valid while the tree holds it.
+		// (Through an integer, so the compiler does not infer that the result
+		// borrows from `this`.)
+		private Node* self() pure nothrow @nogc @trusted
+		{
+			return cast(Node*) cast(size_t) &this;
+		}
+
 		private size_t nextAvailableIndex() const pure nothrow @nogc @safe
 		{
 			import containers.internal.backwards : bsf;
@@ -693,7 +702,7 @@ private:
 			{
 				if (left is null)
 				{
-					left = allocateNode(cast(Value) value, &this, allocator);
+					left = allocateNode(cast(Value) value, self, allocator);
 					calcHeight();
 					return true;
 				}
@@ -707,7 +716,7 @@ private:
 			{
 				if (right is null)
 				{
-					right = allocateNode(value, &this, allocator);
+					right = allocateNode(value, self, allocator);
 					calcHeight();
 					return true;
 				}
@@ -741,13 +750,13 @@ private:
 			if (right is null)
 			{
 				values[] = temp[0 .. $ - 1];
-				right = allocateNode(temp[$ - 1], &this, allocator);
+				right = allocateNode(temp[$ - 1], self, allocator);
 				return true;
 			}
 			if (left is null)
 			{
 				values[] = temp[1 .. $];
-				left = allocateNode(temp[0], &this, allocator);
+				left = allocateNode(temp[0], self, allocator);
 				return true;
 			}
 			if (right.height < left.height)
@@ -898,18 +907,14 @@ private:
 			return r;
 		}
 
-		// Destiny: @trusted instead of @safe. Nodes are always allocated by
-		// the tree's allocator (never on the stack), so `&this` is a heap
-		// address and storing it in neighbouring nodes is fine; scope checking
-		// (always on in Destiny) cannot prove that.
-		void rotateLeft(ref Node* root, AllocatorType allocator) @trusted
+		void rotateLeft(ref Node* root, AllocatorType allocator) @safe
 		{
 			Node* newRoot;
 			if (right.left !is null && right.right is null)
 			{
 				newRoot = right.left;
 				newRoot.parent = this.parent;
-				newRoot.left = &this;
+				newRoot.left = self;
 				newRoot.left.parent = newRoot;
 				newRoot.right = right;
 				newRoot.right.parent = newRoot;
@@ -923,25 +928,21 @@ private:
 				newRoot.parent = this.parent;
 				right = newRoot.left;
 				if (right !is null)
-					right.parent = &this;
-				newRoot.left = &this;
+					right.parent = self;
+				newRoot.left = self;
 				this.parent = newRoot;
 			}
 			cleanup(newRoot, root, allocator);
 		}
 
-		// Destiny: @trusted instead of @safe. Nodes are always allocated by
-		// the tree's allocator (never on the stack), so `&this` is a heap
-		// address and storing it in neighbouring nodes is fine; scope checking
-		// (always on in Destiny) cannot prove that.
-		void rotateRight(ref Node* root, AllocatorType allocator) @trusted
+		void rotateRight(ref Node* root, AllocatorType allocator) @safe
 		{
 			Node* newRoot;
 			if (left.right !is null && left.left is null)
 			{
 				newRoot = left.right;
 				newRoot.parent = this.parent;
-				newRoot.right = &this;
+				newRoot.right = self;
 				newRoot.right.parent = newRoot;
 				newRoot.left = left;
 				newRoot.left.parent = newRoot;
@@ -955,8 +956,8 @@ private:
 				newRoot.parent = this.parent;
 				left = newRoot.right;
 				if (left !is null)
-					left.parent = &this;
-				newRoot.right = &this;
+					left.parent = self;
+				newRoot.right = self;
 				this.parent = newRoot;
 			}
 			cleanup(newRoot, root, allocator);
@@ -1041,7 +1042,7 @@ private:
 	Node* root;
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import core.memory : GC;
 	import std.algorithm : equal, sort, map, filter, each;
@@ -1326,7 +1327,7 @@ version(emsi_containers_unittest) unittest
 	}
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	static class Foo
 	{
@@ -1346,7 +1347,7 @@ version(emsi_containers_unittest) unittest
 	auto r = tt[];
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.range : walkLength;
 	import std.stdio;

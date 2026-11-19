@@ -423,7 +423,7 @@ private:
 	size_t l;
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.algorithm : equal;
 	import std.range : iota;
@@ -471,7 +471,7 @@ version(emsi_containers_unittest)
 	}
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	int* a = new int;
 	{
@@ -481,7 +481,7 @@ version(emsi_containers_unittest) unittest
 	assert(*a == 0); // Destructor not called.
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.exception : assertThrown;
 	import core.exception : RangeError;
@@ -523,7 +523,7 @@ version(emsi_containers_unittest) unittest
 	assert(two.length == 0);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	int* a = new int;
 	DynamicArray!(Cls, Mallocator, true) arr;
@@ -533,7 +533,7 @@ version(emsi_containers_unittest) unittest
 	assert(*a == 0); // Destructor not called.
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	DynamicArray!(int*, Mallocator, true) arr;
 
@@ -548,7 +548,7 @@ version(emsi_containers_unittest) unittest
 	assert (*slice[1] == 2);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.format : format;
 
@@ -583,7 +583,7 @@ version(emsi_containers_unittest) @system unittest
 	assert(p is a[].ptr);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	// Ensure that Array.insert doesn't call the destructor for
 	// a struct whose state is uninitialized memory.
@@ -627,7 +627,7 @@ version(emsi_containers_unittest) @nogc unittest
 	assert(a[] == "abcdefabcdef");
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	enum initialValue = 0x69FF5705DAD1AB6CUL;
 	enum payloadValue = 0x495343303356D18CUL;
@@ -685,7 +685,7 @@ version(emsi_containers_unittest) @nogc unittest
 	assert(a[0].i == 42);
 }
 
-version(emsi_containers_unittest) unittest
+version(emsi_containers_unittest) @system unittest
 {
 	import std.experimental.allocator.building_blocks.region : Region;
 	auto region = Region!Mallocator(1024);

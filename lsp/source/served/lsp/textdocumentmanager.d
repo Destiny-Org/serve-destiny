@@ -24,7 +24,10 @@ struct Document
 	/// Returns null if none is set and can't be guessed.
 	///
 	/// Guessing Map:
-	/// * `.d|.di` = `"d"`
+	/// * `.dd|.ddi|.d|.di` = `"d"`
+	///
+	/// Destiny: editors send `"destiny"` for Destiny files; it is reported as
+	/// `"d"`, the language the server's features check for.
 	/// * `.dpp` = `"dpp"`
 	/// * `.c` = `"c"`
 	/// * `.cpp` = `"cpp"`
@@ -41,7 +44,7 @@ struct Document
 			import std.uni : sicmp;
 
 			const ext = uri.extension;
-			if (ext.sicmp(".d") == 0 || ext.sicmp(".di") == 0)
+			if (ext.sicmp(".dd") == 0 || ext.sicmp(".ddi") == 0 || ext.sicmp(".d") == 0 || ext.sicmp(".di") == 0)
 				return "d";
 			else if (ext.sicmp(".dpp") == 0)
 				return "dpp";
@@ -63,6 +66,8 @@ struct Document
 				return null;
 		}
 
+		if (languageId == "destiny")
+			return "d";
 		return languageId;
 	}
 
@@ -93,6 +98,11 @@ struct Document
 		auto doc = Document("file:///home/projects/app.d");
 		assert(doc.uri == "file:///home/projects/app.d");
 		assert(doc.languageId == "d");
+
+		auto dd = Document("file:///home/projects/app.dd");
+		assert(dd.getLanguageId == "d");
+		dd.languageId = "destiny";
+		assert(dd.getLanguageId == "d");
 		assert(doc.version_ == 0);
 		assert(!doc.rawText.length);
 	}

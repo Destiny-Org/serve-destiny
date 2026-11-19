@@ -30,6 +30,7 @@ some editors:
 * [Nova](editor-nova.md)
 * [Lite-XL](editor-lite-xl.md)
 * [Zed](editor-zed.md)
+* [Eclipse](editor-eclipse.md)
 
 serve-destiny needs `destiny` (and `des` for projects) on `PATH`, or set
 `d.dmdPath` and `d.dubPath` to their paths.
